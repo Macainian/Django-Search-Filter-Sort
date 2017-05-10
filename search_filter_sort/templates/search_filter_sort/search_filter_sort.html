@@ -1,0 +1,98 @@
+{% load bootstrap3 %}
+
+<br>
+
+<div class="row">
+    <div class="col-md-2">
+        <select class="form-control" id="paginate-by-select">
+            <option value="10"> 10 items per page</option>
+            <option value="25" {% if paginate_by == 25 %}selected{% endif %}> 25 items per page</option>
+            <option value="50" {% if paginate_by == 50 %}selected{% endif %}> 50 items per page</option>
+            <option value="100" {% if paginate_by == 100 %}selected{% endif %}> 100 items per page</option>
+        </select>
+    </div>
+
+    <div class="col-md-1">
+        <button class="btn" type="button" id="clear-all-button" onclick="clear_all()">
+            {% bootstrap_icon "ban-circle" %} Clear All
+        </button>
+    </div>
+
+    <div class="col-md-9">
+        <div class="pull-right">
+            <button type="button" class="btn" onclick="search()">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+
+            <button type="button" class="btn" id="clear-search-button" onclick="clear_search()" disabled>
+                Clear Search
+            </button>
+        </div>
+
+        <input type="text" class="form-control pull-right" id="search-text"
+            value="{{ search_by }}" autocomplete="off" style="max-width: 300px;"
+        />
+    </div>
+</div>
+
+
+{% if filters %}
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                        aria-expanded="false" aria-controls="collapseOne">
+                        {% bootstrap_icon "collapse-down" %} Filters (click to show)
+                    </a>
+
+                    &nbsp&nbsp
+
+                    <button type="button" class="btn btn-default" id="apply-filters-button" onclick="apply_filters();"
+                            disabled> Apply Filters
+                    </button>
+
+                    <button type="button" class="btn btn-default" id="clear-filters-button" onclick="clear_filters()"
+                        disabled>
+                        {% bootstrap_icon "filter" %} Clear Filters
+                    </button>
+
+                    <div id="hidden-filters-message-div" style="display: none; color: red">
+                        <b> Note: </b>
+                        Special hidden filters are currently being applied. To remove them, click clear filters.
+                    </div>
+                </h4>
+            </div>
+
+            <div id="collapseOne" class="panel-collapse collapse {% if using_filters %}in{% endif %}" role="tabpanel"
+                 aria-labelledby="headingOne">
+                <div class="panel-body">
+                    <div class="container-fluid">
+                        {% for filter in filters %}
+                            {#                            <div>#}
+                            {#                                    <center>#}
+                            <div class="form-group col-xs-3">
+                                <b>
+                                    {{ filter.html_name }} <span id="{{ filter.filter_name }}-quantity-span"></span>
+                                </b>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {#                                        <br>#}
+                                {{ filter.html_code|safe }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                {#                                        <br><br>#}
+                                {#                                    </center>#}
+                                {#                            </div>#}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {# div for collapse #}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <br>
+{% endif %}
+
+<button class="btn" type="button" id="clear-sorts-button" onclick="clear_sorts()" disabled>
+    {% bootstrap_icon "resize-vertical" %} Clear Sorts
+</button>

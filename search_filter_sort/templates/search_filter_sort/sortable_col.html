@@ -1,0 +1,20 @@
+{% load search_filter_sort_tags %}
+
+{% if is_sortable %}
+    <th id="{{ col_type }}-header" class="sortable_th sorting_none" onclick="add_sort_by('{{ col_type }}')"
+        data-toggle="tooltip" title="{{ tooltip_title }}">
+        {% if tooltip_title %}
+            {% bootstrap_info_icon tooltip_title %}
+        {% endif %}
+        {{ col_title }}
+        <span class="pull-right"><b id="{{ col_type }}-number" style="display: none"></b>&nbsp;&nbsp;</span>
+    </th>
+{% else %}
+    <th class="sortable_th" data-toggle="tooltip" title="{{ tooltip_title }}">
+        {% if tooltip_title %}
+            {% bootstrap_info_icon tooltip_title %}
+        {% endif %}
+        {{ col_title }}
+    </th>
+{% endif %}
+

@@ -1,0 +1,29 @@
+{% load bootstrap3 %}
+
+{% if is_paginated %}
+    <center>
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <button type="button" class="btn-link" onclick="goto_page({{ page_obj.previous_page_number }});">
+                        {% bootstrap_icon "chevron-left" %}
+                    </button>
+                {% endif %}
+
+                <span class="page-current">
+                    Page
+                    <input type="text" id="page-number-text" value="{{ page_obj.number }}" />
+                    of {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <button type="button" class="btn-link" onclick="goto_page({{ page_obj.next_page_number }});">
+                        {% bootstrap_icon "chevron-right" %}
+                    </button>
+                {% endif %}
+            </span>
+        </div>
+    </center>
+{% else %}
+    <input type="hidden" id="page-number-text" value="" />
+{% endif %}
