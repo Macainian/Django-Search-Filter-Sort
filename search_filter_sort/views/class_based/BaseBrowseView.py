@@ -8,7 +8,7 @@ from django.views.generic import ListView
 from django.conf import settings
 from django.core.exceptions import FieldError
 
-from website.apps.search_filter_sort.utils.misc import class_strings_to_class, convert_age_to_date
+from search_filter_sort.utils.misc import class_strings_to_class, convert_age_to_date
 
 logger = logging.getLogger(__name__)
 USER_SEARCH_LIST_DEFAULT = ["username", "first_name", "last_name", "email"]
