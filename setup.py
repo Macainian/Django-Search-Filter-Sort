@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-search-filter-sort',
-    version='0.0.2',
+    version='0.0.3',
     # find_packages() takes a source directory and two lists of package name patterns to exclude and include.
     # If omitted, the source directory defaults to the same directory as the setup script.
     packages=find_packages(),
@@ -10,7 +10,7 @@ setup(
     url='https://github.com/Macainian/Django-Search-Filter-Sort',
     license='MIT License',
     author='Keith Hostetler',
-    author_email='khostetl@nd.edu',
+    author_email='robh@syscon-intl.com',
     description='Django app designed to help with the creation of list views with full functionality for searching, '
                 'filtering, and sorting.',
     classifiers=[
