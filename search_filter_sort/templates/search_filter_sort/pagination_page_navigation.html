@@ -1,4 +1,4 @@
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 
 {% if is_paginated %}
     <center>
@@ -6,7 +6,7 @@
             <span class="page-links">
                 {% if page_obj.has_previous %}
                     <button type="button" class="btn-link" onclick="goto_page({{ page_obj.previous_page_number }});">
-                        {% bootstrap_icon "chevron-left" %}
+                        <i class="fa fa-chevron-left"></i>
                     </button>
                 {% endif %}
 
@@ -18,7 +18,7 @@
 
                 {% if page_obj.has_next %}
                     <button type="button" class="btn-link" onclick="goto_page({{ page_obj.next_page_number }});">
-                        {% bootstrap_icon "chevron-right" %}
+                        <i class="fa fa-chevron-right"></i>
                     </button>
                 {% endif %}
             </span>

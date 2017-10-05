@@ -8,6 +8,6 @@ register = template.Library()
 def bootstrap_info_icon(text):
     """ Generate (i) icon with a tooltip """
     template = Template(
-        """<span data-toggle="tooltip" title="{{ text }}" class="glyphicon glyphicon-info-sign"></span>"""
+        """<i data-toggle="tooltip" title="{{ text }}" class="fa fa-info-circle"></i>"""
     )
     return template.render(Context({"text": text}))
