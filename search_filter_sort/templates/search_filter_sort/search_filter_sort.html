@@ -1,98 +1,101 @@
 {% load bootstrap4 %}
 
-<br>
-
 <div class="row">
-    <div class="col-md-2">
-        <select class="form-control" id="paginate-by-select">
-            <option value="10"> 10 items per page</option>
-            <option value="25" {% if paginate_by == 25 %}selected{% endif %}> 25 items per page</option>
-            <option value="50" {% if paginate_by == 50 %}selected{% endif %}> 50 items per page</option>
-            <option value="100" {% if paginate_by == 100 %}selected{% endif %}> 100 items per page</option>
+    <div class="col-md-6">
+        <select class="custom-select" id="paginate-by-select" aria-labelledby="Select Numbber of Items Per Page">
+            <option value="10" {% if paginate_by == 10 %}selected{% endif %}>10 items per page</option>
+            <option value="25" {% if paginate_by == 25 %}selected{% endif %}>25 items per page</option>
+            <option value="50" {% if paginate_by == 50 %}selected{% endif %}>50 items per page</option>
+            <option value="100" {% if paginate_by == 100 %}selected{% endif %}>100 items per page</option>
         </select>
-    </div>
-
-    <div class="col-md-1">
         <button class="btn" type="button" id="clear-all-button" onclick="clear_all()">
             <i class="fa fa-ban"></i> Clear All
         </button>
     </div>
-
-    <div class="col-md-9">
-        <div class="pull-right">
-            <button type="button" class="btn" onclick="search()">
+    <div class="col-md-6 ">
+        <div class="input-group pull-right" style="max-width: 400px;">
+            <input type="text" class="form-control pull-right" id="search-text"
+                value="{{ search_by }}" autocomplete="off" style="max-width: 250px; float: right;"/>
+            <button type="button" class="btn input-group-addon" onclick="search()" style="float: right;">
                 <i class="fa fa-search"></i>
             </button>
-
-            <button type="button" class="btn" id="clear-search-button" onclick="clear_search()" disabled>
+            <button type="button" class="btn input-group-addon" id="clear-search-button"
+                    onclick="clear_search()" style="float: right;" disabled>
                 Clear Search
             </button>
         </div>
-
-        <input type="text" class="form-control pull-right" id="search-text"
-            value="{{ search_by }}" autocomplete="off" style="max-width: 300px;"
-        />
     </div>
 </div>
+<div class="row">
+    <div class="col-12">
+        {% if filters %}
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                                <i class="fa fa-caret-down"></i> Filters (click to show)
+                            </a>
 
+                            &nbsp&nbsp
 
-{% if filters %}
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                        aria-expanded="false" aria-controls="collapseOne">
-                        <i class="fa fa-caret-down"></i> Filters (click to show)
-                    </a>
+                            <button type="button" class="btn btn-default" id="apply-filters-button" onclick="apply_filters();"
+                                    disabled> Apply Filters
+                            </button>
 
-                    &nbsp&nbsp
+                            <button type="button" class="btn btn-default" id="clear-filters-button" onclick="clear_filters()"
+                                disabled>
+                                <i class="fa fa-filter"></i> Clear Filters
+                            </button>
 
-                    <button type="button" class="btn btn-default" id="apply-filters-button" onclick="apply_filters();"
-                            disabled> Apply Filters
-                    </button>
-
-                    <button type="button" class="btn btn-default" id="clear-filters-button" onclick="clear_filters()"
-                        disabled>
-                        <i class="fa fa-filter"></i> Clear Filters
-                    </button>
-
-                    <div id="hidden-filters-message-div" style="display: none; color: red">
-                        <b> Note: </b>
-                        Special hidden filters are currently being applied. To remove them, click clear filters.
-                    </div>
-                </h4>
-            </div>
-
-            <div id="collapseOne" class="panel-collapse collapse {% if using_filters %}in{% endif %}" role="tabpanel"
-                 aria-labelledby="headingOne">
-                <div class="panel-body">
-                    <div class="container-fluid">
-                        {% for filter in filters %}
-                            {#                            <div>#}
-                            {#                                    <center>#}
-                            <div class="form-group col-xs-3">
-                                <b>
-                                    {{ filter.html_name }} <span id="{{ filter.filter_name }}-quantity-span"></span>
-                                </b>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {#                                        <br>#}
-                                {{ filter.html_code|safe }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                {#                                        <br><br>#}
-                                {#                                    </center>#}
-                                {#                            </div>#}
+                            <div id="hidden-filters-message-div" style="display: none; color: red">
+                                <b> Note: </b>
+                                Special hidden filters are currently being applied. To remove them, click clear filters.
                             </div>
-                        {% endfor %}
+                        </h4>
                     </div>
+
+                    <div id="collapseOne" class="panel-collapse collapse {% if using_filters %}in{% endif %}" role="tabpanel"
+                         aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div class="container-fluid">
+
+                                {% for filter in filters %}
+                                    <div class="form-group col-xs-3">
+                                        <b>
+                                            {{ filter.html_name }} <span id="{{ filter.filter_name }}-quantity-span"></span>
+                                        </b>
+
+                                        {{ filter.html_code|safe }}
+
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                    {# div for collapse #}
                 </div>
-                {# div for collapse #}
             </div>
+        {% else %}
+            <br>
+        {% endif %}
+
+        <div class="input-group">
+            <div class="input-group-addon">
+                <label for="select-all-pages-checkbox" style="margin-top: 8px;">All in Filter</label>
+                <input type="checkbox" id="select-all-pages-checkbox" style="margin: 0 0 0 6px;"
+                   arial-label="Checkbox for Selecting All Filtered Items"/>
+            </div>
+            <!--<div class="input-group-addon">-->
+                <!--<label for="select-all-objects-checkbox" style="margin-top: 8px;">All on Page</label>-->
+                <!--<input type="checkbox" id="select-all-objects-checkbox" style="margin: 0 0 0 6px;"-->
+                    <!--onclick="toggle_select_all_objects();" arial-label="Checkbox for Selection of All Items"/>-->
+            <!--</div>-->
+                <button class="btn input-group-addon" type="button" id="clear-sorts-button" onclick="clear_sorts()" disabled>
+                <i class="fa fa-arrows-v"></i> Clear Sorts
+            </button>
         </div>
     </div>
-{% else %}
-    <br>
-{% endif %}
-
-<button class="btn" type="button" id="clear-sorts-button" onclick="clear_sorts()" disabled>
-    <i class="fa fa-arrows-v"></i> Clear Sorts
-</button>
+</div>

@@ -1,0 +1,25 @@
+.sorting_none
+{
+    background-image:url("../images/sort_both.png");
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+.sorting_asc
+{
+    background-image:url("../images/sort_asc.png");
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+.sorting_desc
+{
+    background-image:url("../images/sort_desc.png");
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
+.sortable_th
+{
+    border: 1px solid #ddd;
+}
