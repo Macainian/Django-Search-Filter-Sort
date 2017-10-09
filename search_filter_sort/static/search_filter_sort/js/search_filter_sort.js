@@ -52,6 +52,7 @@ $(document).ready(function()
 
         object_list_checkboxes.each(function ()
         {
+            $(this).prop('checked', false);
             $(this).attr("disabled", disable_state);
         });
     });
@@ -82,6 +83,14 @@ $(document).ready(function()
     if (sort_bys.length > 0)
     {
         $("#clear-sorts-button").prop("disabled", false);
+    }
+
+    var delete_btn = $(".del_btn_sfs");
+
+    if(delete_btn){
+        $(".object-list-checkbox").click(function() {
+            delete_btn.attr("disabled", !this.checked);
+        });
     }
 
     remove_spinner();

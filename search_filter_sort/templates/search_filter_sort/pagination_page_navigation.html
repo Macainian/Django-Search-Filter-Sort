@@ -1,29 +1,27 @@
 {% load bootstrap4 %}
 
 {% if is_paginated %}
-    <center>
-        <div class="pagination">
-            <span class="page-links">
-                {% if page_obj.has_previous %}
-                    <button type="button" class="btn-link" onclick="goto_page({{ page_obj.previous_page_number }});">
-                        <i class="fa fa-chevron-left"></i>
-                    </button>
-                {% endif %}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <button type="button" class="btn-link" onclick="goto_page({{ page_obj.previous_page_number }});">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+            {% endif %}
 
-                <span class="page-current">
-                    Page
-                    <input type="text" id="page-number-text" value="{{ page_obj.number }}" />
-                    of {{ page_obj.paginator.num_pages }}
-                </span>
-
-                {% if page_obj.has_next %}
-                    <button type="button" class="btn-link" onclick="goto_page({{ page_obj.next_page_number }});">
-                        <i class="fa fa-chevron-right"></i>
-                    </button>
-                {% endif %}
+            <span class="page-current">
+                Page
+                <input type="text" id="page-number-text" value="{{ page_obj.number }}" />
+                of {{ page_obj.paginator.num_pages }}
             </span>
-        </div>
-    </center>
+
+            {% if page_obj.has_next %}
+                <button type="button" class="btn-link" onclick="goto_page({{ page_obj.next_page_number }});">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+            {% endif %}
+        </span>
+    </div>
 {% else %}
     <input type="hidden" id="page-number-text" value="" />
 {% endif %}
