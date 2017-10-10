@@ -2,15 +2,17 @@
 
 <div class="row">
     <div class="col-md-6">
-        <select class="custom-select" id="paginate-by-select" aria-labelledby="Select Numbber of Items Per Page">
-            <option value="10" {% if paginate_by == 10 %}selected{% endif %}>10 items per page</option>
-            <option value="25" {% if paginate_by == 25 %}selected{% endif %}>25 items per page</option>
-            <option value="50" {% if paginate_by == 50 %}selected{% endif %}>50 items per page</option>
-            <option value="100" {% if paginate_by == 100 %}selected{% endif %}>100 items per page</option>
-        </select>
-        <button class="btn" type="button" id="clear-all-button" onclick="clear_all()">
-            <i class="fa fa-ban"></i> Clear All
-        </button>
+        <div class="input-group">
+            <select class="custom-select input-group-addon" id="paginate-by-select" aria-labelledby="Select Numbber of Items Per Page">
+                <option value="10" {% if paginate_by == 10 %}selected{% endif %}>10 items per page</option>
+                <option value="25" {% if paginate_by == 25 %}selected{% endif %}>25 items per page</option>
+                <option value="50" {% if paginate_by == 50 %}selected{% endif %}>50 items per page</option>
+                <option value="100" {% if paginate_by == 100 %}selected{% endif %}>100 items per page</option>
+            </select>
+            <button class="btn input-group-addon" type="button" id="clear-all-button" onclick="clear_all()">
+                <i class="fa fa-ban"></i> Clear All
+            </button>
+        </div>
     </div>
     <div class="col-md-6 ">
         <div class="input-group pull-right" style="max-width: 400px;">
@@ -37,18 +39,14 @@
                                 aria-expanded="false" aria-controls="collapseOne">
                                 <i class="fa fa-caret-down"></i> Filters (click to show)
                             </a>
-
                             &nbsp&nbsp
-
                             <button type="button" class="btn btn-default" id="apply-filters-button" onclick="apply_filters();"
                                     disabled> Apply Filters
                             </button>
-
                             <button type="button" class="btn btn-default" id="clear-filters-button" onclick="clear_filters()"
                                 disabled>
                                 <i class="fa fa-filter"></i> Clear Filters
                             </button>
-
                             <div id="hidden-filters-message-div" style="display: none; color: red">
                                 <b> Note: </b>
                                 Special hidden filters are currently being applied. To remove them, click clear filters.
