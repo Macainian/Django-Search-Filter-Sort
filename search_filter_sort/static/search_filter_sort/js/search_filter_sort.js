@@ -85,7 +85,7 @@ $(document).ready(function()
         $("#clear-sorts-button").prop("disabled", false);
     }
 
-    var delete_btn = $("#del_btn_sfs");
+    var delete_btn = $("#sfs_del_btn");
     var select_all_on_page = $("#select-all-objects-checkbox");
     var select_all_in_filter = $("#select-all-pages-checkbox");
     var object_list_checkbox = $(".object-list-checkbox");
