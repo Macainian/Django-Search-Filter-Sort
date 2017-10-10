@@ -30,5 +30,10 @@
 }
 
 .sfs-all-clear-group {
-    padding: 0 .75em;
+    padding: 0;
+}
+
+.sfs-all-clear-group .input-group-addon {
+    padding-top: 0;
+    padding-bottom: 0;
 }
