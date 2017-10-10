@@ -10,7 +10,7 @@
                 <option value="100" {% if paginate_by == 100 %}selected{% endif %}>100 items per page</option>
             </select>
             <button class="btn input-group-addon" type="button" id="clear-all-button" onclick="clear_all()">
-                <i class="fa fa-ban"></i> Clear All
+                <i class="fa fa-ban"></i>&nbsp;Clear All
             </button>
         </div>
     </div>
@@ -37,7 +37,7 @@
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                                 aria-expanded="false" aria-controls="collapseOne">
-                                <i class="fa fa-caret-down"></i> Filters (click to show)
+                                <i class="fa fa-caret-down"></i>&nbsp;Filters (click to show)
                             </a>
                             &nbsp&nbsp
                             <button type="button" class="btn btn-default" id="apply-filters-button" onclick="apply_filters();"
@@ -45,7 +45,7 @@
                             </button>
                             <button type="button" class="btn btn-default" id="clear-filters-button" onclick="clear_filters()"
                                 disabled>
-                                <i class="fa fa-filter"></i> Clear Filters
+                                <i class="fa fa-filter"></i>&nbsp;Clear Filters
                             </button>
                             <div id="hidden-filters-message-div" style="display: none; color: red">
                                 <b> Note: </b>
@@ -92,7 +92,7 @@
                     <!--onclick="toggle_select_all_objects();" arial-label="Checkbox for Selection of All Items"/>-->
             <!--</div>-->
             <button class="btn btn-sm input-group-addon" type="button" id="clear-sorts-button" onclick="clear_sorts()" disabled>
-                <i class="fa fa-arrows-v"></i> Clear Sorts
+                <i class="fa fa-arrows-v"></i>&nbsp;Clear Sorts
             </button>
         </div>
     </div>
