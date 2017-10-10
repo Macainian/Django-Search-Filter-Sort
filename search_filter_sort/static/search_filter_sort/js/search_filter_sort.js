@@ -85,11 +85,32 @@ $(document).ready(function()
         $("#clear-sorts-button").prop("disabled", false);
     }
 
-    var delete_btn = $(".del_btn_sfs");
+    var delete_btn = $("#del_btn_sfs");
+    var select_all_on_page = $("#select-all-objects-checkbox");
+    var select_all_in_filter = $("#select-all-pages-checkbox");
+    var object_list_checkbox = $(".object-list-checkbox");
 
-    if(delete_btn){
-        $(".object-list-checkbox").click(function() {
-            delete_btn.attr("disabled", !this.checked);
+    if(delete_btn.length){
+        select_all_on_page.change(function(){
+            if (object_list_checkbox.length > 0){
+                delete_btn.attr("disabled", !this.checked);
+            }
+        });
+
+        select_all_in_filter.change(function(){
+            if (object_list_checkbox.length > 0){
+                delete_btn.attr("disabled", !this.checked);
+            }
+        });
+
+        $(".object-list-checkbox").change(function(){
+            if (select_all_on_page.is(":not(:checked)")) {
+                if (!$("table").find($(".object-list-checkbox:checked")).length > 0){
+                    delete_btn.attr("disabled", "disabled");
+                } else {
+                    delete_btn.removeAttr("disabled");
+                }
+            }
         });
     }
 

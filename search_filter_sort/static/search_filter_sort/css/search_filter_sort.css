@@ -28,3 +28,7 @@
 .sortable_th span {
     cursor: pointer;
 }
+
+.sfs-all-clear-group {
+    padding: 0 .75em;
+}
