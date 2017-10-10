@@ -37,3 +37,9 @@
     padding-top: 0;
     padding-bottom: 0;
 }
+
+.sfs-all-clear-group .input-group-addon label {
+    margin-top: 3px;
+    margin-bottom: 4px;
+}
+
