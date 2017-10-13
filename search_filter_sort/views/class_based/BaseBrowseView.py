@@ -27,7 +27,7 @@ class BaseBrowseView(ListView):
     filters = []
     filter_names = []
     sorts = []
-    default_sort_by = []
+    default_sort_by = ["-id"]
     default_pagination = 25
 
     search_by = None
