@@ -242,7 +242,7 @@ class BaseBrowseView(ListView):
         html_code = \
             '<input type="number" class="range-filter form-control" id="' + lower_filter_name + '-filter" ' + \
                 'name="' + lower_filter_name + '" step="' + step_size + '" style="max-width: ' + max_width + '" />' + \
-            '<b> - </b>' + \
+            '<strong> - </strong>' + \
             '<input type="number" class="range-filter form-control" id="' + upper_filter_name + '-filter" ' + \
                 'name="' + upper_filter_name + '" step="' + step_size + '" style="max-width: ' + max_width + '" />'
 

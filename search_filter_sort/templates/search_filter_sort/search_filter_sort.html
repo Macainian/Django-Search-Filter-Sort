@@ -48,7 +48,7 @@
                                 <i class="fa fa-filter"></i>&nbsp;Clear Filters
                             </button>
                             <div id="hidden-filters-message-div" style="display: none; color: red">
-                                <b> Note: </b>
+                                <strong> Note: </strong>
                                 Special hidden filters are currently being applied. To remove them, click clear filters.
                             </div>
                         </h4>
@@ -61,9 +61,9 @@
 
                                 {% for filter in filters %}
                                     <div class="form-group col-xs-3">
-                                        <b>
+                                        <strong>
                                             {{ filter.html_name }} <span id="{{ filter.filter_name }}-quantity-span"></span>
-                                        </b>
+                                        </strong>
 
                                         {{ filter.html_code|safe }}
 
@@ -79,21 +79,31 @@
         {% else %}
             <br>
         {% endif %}
-
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
         <div class="input-group sfs-all-clear-group">
             <div class="input-group-addon filter-clear-sort">
                 <label for="select-all-pages-checkbox">All in Filter</label>
                 <input type="checkbox" id="select-all-pages-checkbox" style="margin: 0 0 0 6px;"
                    arial-label="Checkbox for Selecting All Filtered Items"/>
             </div>
-            <!--<div class="input-group-addon">-->
-                <!--<label for="select-all-objects-checkbox" style="margin-top: 8px;">All on Page</label>-->
-                <!--<input type="checkbox" id="select-all-objects-checkbox" style="margin: 0 0 0 6px;"-->
-                    <!--onclick="toggle_select_all_objects();" arial-label="Checkbox for Selection of All Items"/>-->
-            <!--</div>-->
             <button class="btn btn-sm input-group-addon" type="button" id="clear-sorts-button" onclick="clear_sorts()" disabled>
                 <i class="fa fa-arrows-v"></i>&nbsp;Clear Sorts
             </button>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="pull-right">
+            <div class="input-group sfs-total-group">
+                <div class="input-group-addon">
+                    <strong>Filter Total: {{ object_count }}</strong>
+                </div>
+                <div class="input-group-addon">
+                    <strong>Total: {{ object_count }}</strong>
+                </div>
+            </div>
         </div>
     </div>
 </div>
