@@ -32,6 +32,7 @@ class BaseBrowseView(ListView):
 
     search_by = None
     using_filters = None
+    object_count = None
 
     def dispatch(self, request, *args, **kwargs):
         try:
@@ -49,6 +50,7 @@ class BaseBrowseView(ListView):
             # To avoid infinite redirection loop
             if request.path == request.get_full_path():
                 raise
+
             return HttpResponseRedirect(request.path)
 
     def get_context_data(self, **kwargs):
@@ -61,6 +63,8 @@ class BaseBrowseView(ListView):
         context["filter_names"] = self.filter_names
         context["using_filters"] = self.using_filters
         context["default_pagination"] = self.default_pagination
+        context["object_count"] = self.object_count
+        context["total_object_count"] = self.model.objects
 
         return context
 
@@ -119,6 +123,8 @@ class BaseBrowseView(ListView):
             queryset = self.model.objects.filter(filter_reduce).distinct().order_by(*sort_list)
         else:
             queryset = self.model.objects.order_by(*sort_list)
+
+        self.object_count = queryset.count()
 
         return queryset
 
