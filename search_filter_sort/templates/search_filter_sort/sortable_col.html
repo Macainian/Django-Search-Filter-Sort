@@ -1,7 +1,7 @@
 {% load search_filter_sort_tags %}
 
 {% if is_sortable %}
-    <th id="{{ col_type }}-header" class="sortable_th sorting_none" onclick="add_sort_by('{{ col_type }}')"
+    <th id="{{ col_type }}-header" class="sortable_th sorting_none {{ sorting_shade }}" onclick="add_sort_by('{{ col_type }}')"
         data-toggle="tooltip" title="{{ tooltip_title }}">
         {% if tooltip_title %}
             {% bootstrap_info_icon tooltip_title %}

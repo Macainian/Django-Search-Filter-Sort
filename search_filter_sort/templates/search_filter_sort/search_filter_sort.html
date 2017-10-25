@@ -2,27 +2,28 @@
 
 <div class="row">
     <div class="col-md-6">
-        <div class="input-group">
-            <select class="custom-select input-group-addon" id="paginate-by-select" aria-labelledby="Select Numbber of Items Per Page">
+        <div class="input-group input-group-sm">
+            <select class="custom-select input-group-addon" id="paginate-by-select"
+                    aria-labelledby="Select Numbber of Items Per Page" style="width: 150px;">
                 <option value="10" {% if paginate_by == 10 %}selected{% endif %}>10 items per page</option>
                 <option value="25" {% if paginate_by == 25 %}selected{% endif %}>25 items per page</option>
                 <option value="50" {% if paginate_by == 50 %}selected{% endif %}>50 items per page</option>
                 <option value="100" {% if paginate_by == 100 %}selected{% endif %}>100 items per page</option>
             </select>
-            <button class="btn input-group-addon" type="button" id="clear-all-button" onclick="clear_all()">
+            <button class="btn input-group-addon btn-sm" type="button" id="clear-all-button" onclick="clear_all()">
                 <i class="fa fa-ban"></i>&nbsp;Clear All
             </button>
         </div>
     </div>
     <div class="col-md-6 ">
-        <div class="input-group pull-right" style="max-width: 400px;">
-            <input type="text" class="form-control pull-right" id="search-text"
-                value="{{ search_by }}" autocomplete="off" style="max-width: 250px; float: right;"/>
-            <button type="button" class="btn input-group-addon" onclick="search()" style="float: right;">
+        <div class="input-group pull-right input-group-sm" style="max-width: 400px;">
+            <input type="text" class="form-control float-right" id="search-text"
+                value="{{ search_by }}" autocomplete="off" />
+            <button type="button" class="btn input-group-addon btn-sm" onclick="search()">
                 <i class="fa fa-search"></i>
             </button>
-            <button type="button" class="btn input-group-addon" id="clear-search-button"
-                    onclick="clear_search()" style="float: right;" disabled>
+            <button type="button" class="btn input-group-addon btn-sm" id="clear-search-button"
+                    onclick="clear_search()" disabled>
                 Clear Search
             </button>
         </div>
@@ -39,7 +40,7 @@
                                 aria-expanded="false" aria-controls="collapseOne">
                                 <i class="fa fa-caret-down"></i>&nbsp;Filters (click to show)
                             </a>
-                            &nbsp&nbsp
+                            &nbsp;&nbsp;
                             <button type="button" class="btn btn-default" id="apply-filters-button" onclick="apply_filters();"
                                     disabled> Apply Filters
                             </button>
@@ -77,17 +78,17 @@
                 </div>
             </div>
         {% else %}
-            <br>
+            <hr>
         {% endif %}
     </div>
 </div>
 <div class="row">
     <div class="col-sm-6">
-        <div class="input-group sfs-all-clear-group">
+        <div class="input-group sfs-all-clear-group input-group-sm">
             <div class="input-group-addon filter-clear-sort">
-                <label for="select-all-pages-checkbox">All in Filter</label>
+                <span>All in Filter</span>
                 <input type="checkbox" id="select-all-pages-checkbox" style="margin: 0 0 0 6px;"
-                   arial-label="Checkbox for Selecting All Filtered Items"/>
+                   arial-label="Checkbox for Selecting All Filtered Items" />
             </div>
             <button class="btn btn-sm input-group-addon" type="button" id="clear-sorts-button" onclick="clear_sorts()" disabled>
                 <i class="fa fa-arrows-v"></i>&nbsp;Clear Sorts
@@ -96,7 +97,7 @@
     </div>
     <div class="col-sm-6">
         <div class="pull-right">
-            <div class="input-group sfs-total-group">
+            <div class="input-group sfs-total-group input-group-sm">
                 <div class="input-group-addon">
                     <strong>Total: {{ total_object_count }}</strong>
                 </div>

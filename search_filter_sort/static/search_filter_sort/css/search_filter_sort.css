@@ -1,22 +1,37 @@
-.sorting_none
+.sorting_none.dark
 {
     background-image:url("../images/sort_both.png");
     background-repeat: no-repeat;
     background-position: center right;
 }
 
-.sorting_asc
+.sorting_asc.dark
 {
     background-image:url("../images/sort_asc.png");
     background-repeat: no-repeat;
     background-position: center right;
 }
 
-.sorting_desc
+.sorting_desc.dark
 {
     background-image:url("../images/sort_desc.png");
     background-repeat: no-repeat;
     background-position: center right;
+}
+
+.sorting_none.light
+{
+    background-image:url("../images/sort_both_light.png");
+}
+
+.sorting_asc.light
+{
+    background-image:url("../images/sort_asc_light.png");
+}
+
+.sorting_desc.light
+{
+    background-image:url("../images/sort_desc_light.png");
 }
 
 .sortable_th
@@ -28,29 +43,3 @@
 .sortable_th span {
     cursor: pointer;
 }
-
-.sfs-all-clear-group {
-    padding: 0;
-}
-
-.sfs-all-clear-group .input-group-addon {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.sfs-all-clear-group .input-group-addon label {
-    margin-top: 5px;
-    margin-bottom: 4px;
-}
-
-.sfs-total-group .input-group-addon {
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 7px .75rem;
-    line-height: 15px;
-}
-
-.name-number {
-    padding-right: 10px;
-}
-
