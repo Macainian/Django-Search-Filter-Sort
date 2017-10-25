@@ -124,7 +124,7 @@ class BaseBrowseView(ListView):
         else:
             queryset = self.model.objects.order_by(*sort_list)
 
-        self.object_count = queryset.count()
+        self.filtered_object_count = queryset.count()
 
         return queryset
 
