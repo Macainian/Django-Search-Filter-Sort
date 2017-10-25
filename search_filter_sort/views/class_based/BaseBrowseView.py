@@ -32,7 +32,7 @@ class BaseBrowseView(ListView):
 
     search_by = None
     using_filters = None
-    object_count = None
+    filtered_object_count = None
 
     def dispatch(self, request, *args, **kwargs):
         try:
@@ -63,8 +63,8 @@ class BaseBrowseView(ListView):
         context["filter_names"] = self.filter_names
         context["using_filters"] = self.using_filters
         context["default_pagination"] = self.default_pagination
-        context["object_count"] = self.object_count
-        context["total_object_count"] = self.model.objects
+        context["filtered_object_count"] = self.filtered_object_count
+        context["total_object_count"] = self.model.objects.count()
 
         return context
 
