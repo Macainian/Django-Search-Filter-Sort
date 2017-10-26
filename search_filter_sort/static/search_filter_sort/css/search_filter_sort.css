@@ -22,16 +22,22 @@
 .sorting_none.light
 {
     background-image:url("../images/sort_both_light.png");
+    background-repeat: no-repeat;
+    background-position: center right;
 }
 
 .sorting_asc.light
 {
     background-image:url("../images/sort_asc_light.png");
+    background-repeat: no-repeat;
+    background-position: center right;
 }
 
 .sorting_desc.light
 {
     background-image:url("../images/sort_desc_light.png");
+    background-repeat: no-repeat;
+    background-position: center right;
 }
 
 .sortable_th
