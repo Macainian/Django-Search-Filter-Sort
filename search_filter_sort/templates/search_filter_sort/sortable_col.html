@@ -2,7 +2,7 @@
 
 {% if is_sortable %}
     <th id="{{ col_type }}-header" onclick="add_sort_by('{{ col_type }}')" data-toggle="tooltip" title="{{ tooltip_title }}"
-        class="sortable_th sorting_none {% if sorting_shade %}{{ sorting_shade }}{% else %}dark{% end if %}">
+        class="sortable_th sorting_none {% if sorting_shade %}{{ sorting_shade }}{% else %}dark{% endif %}">
         {% if tooltip_title %}
             {% bootstrap_info_icon tooltip_title %}
         {% endif %}
