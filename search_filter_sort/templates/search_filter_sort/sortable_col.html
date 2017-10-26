@@ -1,13 +1,13 @@
 {% load search_filter_sort_tags %}
 
 {% if is_sortable %}
-    <th id="{{ col_type }}-header" onclick="add_sort_by('{{ col_type }}')" data-toggle="tooltip" title="{{ tooltip_title }}"
+    <th id="{{ col_type }}_header" onclick="add_sort_by('{{ col_type }}')" data-toggle="tooltip" title="{{ tooltip_title }}"
         class="sortable_th sorting_none {% if sorting_shade %}{{ sorting_shade }}{% else %}dark{% endif %}">
         {% if tooltip_title %}
             {% bootstrap_info_icon tooltip_title %}
         {% endif %}
         {{ col_title }}
-        <span class="pull-right"><strong id="{{ col_type }}-number" style="display: none"></strong>&nbsp;&nbsp;</span>
+        <span class="pull-right"><strong id="{{ col_type }}_number" style="display: none"></strong>&nbsp;&nbsp;</span>
     </th>
 {% else %}
     <th class="sortable_th" data-toggle="tooltip" title="{{ tooltip_title }}">

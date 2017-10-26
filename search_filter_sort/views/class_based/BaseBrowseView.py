@@ -232,7 +232,7 @@ class BaseBrowseView(ListView):
         self.filter_names = []
 
     def add_select_filter(self, html_name, filter_name, html_options_code):
-        html_code = '<select class="multi-select form-control" id="' + filter_name + '-filter" name="' + filter_name + '_filter" autocomplete="off" multiple>'
+        html_code = '<select class="multi-select form-control" id="' + filter_name + '_filter" name="' + filter_name + '_filter" autocomplete="off" multiple>'
         html_code += html_options_code + '</select>'
 
         self.filters.append(
@@ -246,10 +246,10 @@ class BaseBrowseView(ListView):
 
     def add_number_range_filter(self, html_name, lower_filter_name, upper_filter_name, max_width="50px", step_size="1"):
         html_code = \
-            '<input type="number" class="range-filter form-control" id="' + lower_filter_name + '-filter" ' + \
+            '<input type="number" class="range-filter form-control" id="' + lower_filter_name + '_filter" ' + \
                 'name="' + lower_filter_name + '" step="' + step_size + '" style="max-width: ' + max_width + '" />' + \
             '<strong> - </strong>' + \
-            '<input type="number" class="range-filter form-control" id="' + upper_filter_name + '-filter" ' + \
+            '<input type="number" class="range-filter form-control" id="' + upper_filter_name + '_filter" ' + \
                 'name="' + upper_filter_name + '" step="' + step_size + '" style="max-width: ' + max_width + '" />'
 
         self.filters.append(

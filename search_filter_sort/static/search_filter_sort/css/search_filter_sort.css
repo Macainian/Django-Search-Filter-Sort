@@ -49,3 +49,7 @@
 .sortable_th span {
     cursor: pointer;
 }
+
+.sortable_th span strong {
+    margin-right: 10px;
+}

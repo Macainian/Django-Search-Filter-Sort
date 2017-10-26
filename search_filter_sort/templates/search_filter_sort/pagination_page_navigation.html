@@ -11,7 +11,7 @@
 
             <span class="page-current">
                 Page
-                <input type="text" id="page-number-text" value="{{ page_obj.number }}" />
+                <input type="text" id="page_number_text" value="{{ page_obj.number }}" />
                 of {{ page_obj.paginator.num_pages }}
             </span>
 
@@ -23,5 +23,5 @@
         </span>
     </div>
 {% else %}
-    <input type="hidden" id="page-number-text" value="" />
+    <input type="hidden" id="page_number_text" value="" />
 {% endif %}

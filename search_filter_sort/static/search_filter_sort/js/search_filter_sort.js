@@ -12,13 +12,13 @@ var sort_bys = [];
 
 $(document).ready(function()
 {
-    $("#paginate-by-select").change(function()
+    $("#paginate_by_select").change(function()
     {
         paginate_by = [$(this).val()];
         goto_new_url(true, true, true);
     });
 
-    var page_number_text = $("#page-number-text");
+    var page_number_text = $("#page_number_text");
 
     if (page_number_text.val()){
         var page_number_text_size = page_number_text.val().length * 10 + 5;
@@ -29,12 +29,12 @@ $(document).ready(function()
 
     $(window).keydown(function (event)
     {
-        if (event.keyCode == 13 && $("#search-text").is(":focus"))
+        if (event.keyCode == 13 && $("#search_text").is(":focus"))
         {
             search();
         }
 
-        var page_number_text = $("#page-number-text");
+        var page_number_text = $("#page_number_text");
 
         if (event.keyCode == 13 && page_number_text.is(":focus"))
         {
@@ -42,11 +42,11 @@ $(document).ready(function()
         }
     });
 
-    $("#select-all-pages-checkbox").change(function()
+    $("#select_all_pages_checkbox").change(function()
     {
         var disable_state = $(this).prop("checked");
 
-        $("#select-all-objects-checkbox").attr("disabled", disable_state);
+        $("#select_all_objects_checkbox").attr("disabled", disable_state);
 
         var object_list_checkboxes = $(".object-list-checkbox");
 
@@ -75,19 +75,19 @@ $(document).ready(function()
 
     if (search_bys.length > 0)
     {
-        $("#clear-search-button").prop("disabled", false);
+        $("#clear_search_button").prop("disabled", false);
     }
 
     set_filter_button_states();
 
     if (sort_bys.length > 0)
     {
-        $("#clear-sorts-button").prop("disabled", false);
+        $("#clear_sorts_button").prop("disabled", false);
     }
 
     var delete_btn = $("#sfs_del_btn");
-    var select_all_on_page = $("#select-all-objects-checkbox");
-    var select_all_in_filter = $("#select-all-pages-checkbox");
+    var select_all_on_page = $("#select_all_objects_checkbox");
+    var select_all_in_filter = $("#select_all_pages_checkbox");
     var object_list_checkbox = $(".object-list-checkbox");
 
     if(delete_btn.length){
@@ -139,7 +139,7 @@ function set_filter_mousedown_functions()
     options.click(function(event)
     {
         filter_name = $(this).parent().attr("name").split("_filter")[0];
-        filter_quantity_span = $("#" + filter_name + "-quantity-span");
+        filter_quantity_span = $("#" + filter_name + "_quantity_span");
 
         if ($(this).prop("selected"))
         {
@@ -295,11 +295,11 @@ function set_filters()
         for (i = 0; i < filter_names.length; i++)  // Go through all of them and see if any are being used
         {
             filter_name = filter_names[i];
-            filter_quantity_span = $("#" + filter_name + "-quantity-span");
+            filter_quantity_span = $("#" + filter_name + "_quantity_span");
 
             if (filter_bys[filter_name])  // If this filter is being used
             {
-                $("#" + filter_name + "-filter").val(filter_bys[filter_name].split(","));
+                $("#" + filter_name + "_filter").val(filter_bys[filter_name].split(","));
                 filter_quantity_span.text("(" + filter_bys[filter_name].split(",").length + ")");
                 delete hidden_filters[filter_name];
             }
@@ -308,7 +308,7 @@ function set_filters()
 
     if (Object.keys(hidden_filters).length > 0)
     {
-        $("#hidden-filters-message-div").css("display", "");
+        $("#hidden_filters_message_div").css("display", "");
     }
 }
 
@@ -325,12 +325,12 @@ function set_sort_symbols()
         if (sort_by_split.length == 2)  // Is using -
         {
             change_sorting_symbol(sort_by_split[1], "sorting_desc");
-            sort_text = $("#" + sort_by_split[1] + "-number");
+            sort_text = $("#" + sort_by_split[1] + "_number");
         }
         else
         {
             change_sorting_symbol(sort_bys[i], "sorting_asc");
-            sort_text = $("#" + sort_bys[i] + "-number");
+            sort_text = $("#" + sort_bys[i] + "_number");
         }
 
         sort_text.text(i+1);
@@ -340,7 +340,7 @@ function set_sort_symbols()
 
 function set_pagination()
 {
-    $("#paginate-by-select").val(paginate_by[paginate_by.length - 1]);
+    $("#paginate_by_select").val(paginate_by[paginate_by.length - 1]);
 }
 
 function fix_range_filters()
@@ -381,7 +381,7 @@ function add_sort_by(sort_by)
         {
             sort_bys.splice(index, 1);
             change_sorting_symbol(sort_by, "sorting_none");
-            $("#" + sort_by + "-number").css("display", "none");
+            $("#" + sort_by + "_number").css("display", "none");
         }
         else
         {
@@ -460,7 +460,7 @@ function goto_new_url(should_include_searches, should_include_filters, should_in
 
 function change_sorting_symbol(base_id, new_class)
 {
-    var sort_to_set = $("#" + base_id + "-header");
+    var sort_to_set = $("#" + base_id + "_header");
 
     sort_to_set.removeClass("sorting_none");
     sort_to_set.removeClass("sorting_asc");
@@ -471,8 +471,8 @@ function change_sorting_symbol(base_id, new_class)
 
 function set_filter_button_states()
 {
-    var clear_filters_button = $("#clear-filters-button");
-    var apply_filters_button = $("#apply-filters-button");
+    var clear_filters_button = $("#clear_filters_button");
+    var apply_filters_button = $("#apply_filters_button");
 
     // If there weren't any filters coming onto the page and if there aren't any new ones and if there aren't any range_filters
     if (Object.keys(original_filter_bys).length == 0 && Object.keys(filter_bys).length == 0 && Object.keys(range_filters).length == 0)
@@ -521,9 +521,9 @@ function clear_all()
 
 function search()
 {
-    var search_text = $("#search-text");
+    var search_text = $("#search_text");
 
-    if (search_text.val() != "")
+    if (search_text.val() !== "")
     {
         search_bys = [search_text.val()];
     }
@@ -544,7 +544,7 @@ function toggle_select_all_objects()
 {
     var object_list_checkboxes = $(".object-list-checkbox");
 
-    if ($("#select-all-objects-checkbox").is(":checked")) // Turn everything on
+    if ($("#select_all_objects_checkbox").is(":checked")) // Turn everything on
     {
         object_list_checkboxes.each(function ()
         {
@@ -566,13 +566,13 @@ function get_new_url_via_checkboxes(base_url)
     var url = base_url + "?";
     var query_string;
     var at_least_one_box_is_checked = false;
-    var all_pages_checkbox_is_checked = $("#select-all-pages-checkbox").is(":checked");
+    var all_pages_checkbox_is_checked = $("#select_all_pages_checkbox").is(":checked");
 
     if (all_pages_checkbox_is_checked)
     {
         query_string = decodeURIComponent(window.location.href).split("?");
 
-        if (query_string.length == 2)  // Url has parameters
+        if (query_string.length === 2)  // Url has parameters
         {
             url += query_string[1];
         }
