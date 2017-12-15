@@ -11,7 +11,7 @@
                 <option value="100" {% if paginate_by == 100 %}selected{% endif %}>100 items per page</option>
             </select>
             <button class="btn input-group-addon btn-sm" type="button" id="clear_all_button" onclick="clear_all()">
-                <i class="fa fa-ban"></i>&nbsp;Clear All
+                <i class="fas fa-ban"></i>&nbsp;Clear All
             </button>
         </div>
     </div>
@@ -20,7 +20,7 @@
             <input type="text" class="form-control float-right" id="search_text"
                 value="{{ search_by }}" autocomplete="off" />
             <button type="button" class="btn input-group-addon btn-sm" onclick="search()">
-                <i class="fa fa-search"></i>
+                <i class="fas fa-search"></i>
             </button>
             <button type="button" class="btn input-group-addon btn-sm" id="clear_search_button"
                     onclick="clear_search()" disabled>
@@ -38,7 +38,7 @@
                         <h4 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                                 aria-expanded="false" aria-controls="collapseOne">
-                                <i class="fa fa-caret-down"></i>&nbsp;Filters (click to show)
+                                <i class="fas fa-caret-down"></i>&nbsp;Filters (click to show)
                             </a>
                             &nbsp;&nbsp;
                             <button type="button" class="btn btn-default" id="apply_filters_button" onclick="apply_filters();"
@@ -46,7 +46,7 @@
                             </button>
                             <button type="button" class="btn btn-default" id="clear_filters_button" onclick="clear_filters()"
                                 disabled>
-                                <i class="fa fa-filter"></i>&nbsp;Clear Filters
+                                <i class="fas fa-filter"></i>&nbsp;Clear Filters
                             </button>
                             <div id="hidden_filters_message_div" style="display: none; color: red">
                                 <strong> Note: </strong>
@@ -91,7 +91,7 @@
                    arial-label="Checkbox for Selecting All Filtered Items" />
             </div>
             <button class="btn btn-sm input-group-addon" type="button" id="clear_sorts_button" onclick="clear_sorts()" disabled>
-                <i class="fa fa-arrows-v"></i>&nbsp;Clear Sorts
+                <i class="fas fa-arrows-alt-v"></i>&nbsp;Clear Sorts
             </button>
         </div>
     </div>

@@ -12,7 +12,7 @@ If you want to report any bugs, you can use the github issue tracker. If you hav
 - Django >=? (I am using 1.10.3 and 1.11)
 - django-bootstrap4 >= 0.0.3 (Bootstrap 4 is still currently in Beta)
 - jQuery >= ? (I am using 1.12.0)
-- Font Awesome Icons installed or linked to your project (Bootstrap 4 no longer has glyphicons)
+- FontAwesome 5 Icons installed or linked to your project (Bootstrap 4 no longer has glyphicons)
 
 # Installation
 
