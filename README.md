@@ -1,4 +1,3 @@
-[![Downloads](https://img.shields.io/pypi/dw/django-search-filter-sort.svg)](https://pypi.python.org/pypi/django-search-filter-sort)
 [![Version](https://img.shields.io/pypi/v/django-search-filter-sort.svg)](https://pypi.python.org/pypi/django-search-filter-sort)
 [![License](https://img.shields.io/pypi/l/django-search-filter-sort.svg)](https://pypi.python.org/pypi/django-search-filter-sort)
 [![Python](https://img.shields.io/pypi/pyversions/django-search-filter-sort.svg)](https://pypi.python.org/pypi/django-search-filter-sort)
