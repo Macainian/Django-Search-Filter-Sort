@@ -1,55 +1,85 @@
-.sorting_none.dark
-{
+.sorting_none.dark {
     background-image:url("../images/sort_both.png");
     background-repeat: no-repeat;
-    background-position: center right;
+    background-position: top 6px right;
 }
 
-.sorting_asc.dark
-{
+.sorting_asc.dark {
     background-image:url("../images/sort_asc.png");
     background-repeat: no-repeat;
-    background-position: center right;
+    background-position: top -2px right;
 }
 
-.sorting_desc.dark
-{
+.sorting_desc.dark {
     background-image:url("../images/sort_desc.png");
     background-repeat: no-repeat;
-    background-position: center right;
+    background-position: bottom 1px right;
 }
 
-.sorting_none.light
-{
+.sorting_none.light {
     background-image:url("../images/sort_both_light.png");
     background-repeat: no-repeat;
-    background-position: center right;
+    background-position: top 6px right;
 }
 
-.sorting_asc.light
-{
+.sorting_asc.light {
     background-image:url("../images/sort_asc_light.png");
     background-repeat: no-repeat;
-    background-position: center right;
+    background-position: top -2px right;
 }
 
-.sorting_desc.light
-{
+.sorting_desc.light {
     background-image:url("../images/sort_desc_light.png");
     background-repeat: no-repeat;
-    background-position: center right;
+    background-position: bottom 1px right;
 }
 
-.sortable_th
-{
+.sortable_th {
     border: 1px solid #ddd;
     cursor: default;
+    font-size: 0.9em;
 }
 
-.sortable_th span {
-    cursor: pointer;
+.sortable_th .th-container {
+    display: block;
+    width: 100%;
+    vertical-align: middle;
 }
 
-.sortable_th span strong {
-    margin-right: 10px;
+.sortable_th .th-container .column-title {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
 }
+
+.sortable_th .th-container .sort-container {
+    display: table-cell;
+    max-width: 14px;
+    vertical-align: middle;
+    padding-left: 6px;
+    height: 32px;
+}
+
+.sortable_th .th-container .sort-container .sort-controls {
+    text-align: right;
+    display: table-cell;
+    height: 32px;
+    max-height: 32px;
+    max-width: 14px;
+    width: 14px;
+    margin: 0;
+    padding-left: 1px;
+    vertical-align: middle;
+}
+
+.sortable_th .th-container .sort-container .sort-controls span {
+    display:table-cell;
+    vertical-align: middle;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 0.8em;
+}
+
+.table thead th.sortable_th {
+    vertical-align: middle;
+}
+
