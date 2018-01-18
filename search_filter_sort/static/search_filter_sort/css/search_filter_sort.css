@@ -83,3 +83,17 @@
     vertical-align: middle;
 }
 
+/** Machine Event Reason Manager pagination styles **/
+.page-item.page-of .page-link {
+  color: #000000;
+  background-color: #ffffff;
+  border-color: #dddddd;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+input#page_number_text {
+  height: 36px;
+  width: 40px;
+  display: inline-block;
+}
