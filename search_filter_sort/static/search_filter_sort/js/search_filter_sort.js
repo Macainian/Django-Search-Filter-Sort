@@ -23,6 +23,10 @@ $(document).ready(function() {
         goto_new_url(true, true, true);
     });
 
+    if(page_number_text.val()) {
+        page_num_input_form_size(page_number_text)
+    }
+
     page_num_input_form_size(page_number_text);
 
     page_number_text.on('input', function() {
