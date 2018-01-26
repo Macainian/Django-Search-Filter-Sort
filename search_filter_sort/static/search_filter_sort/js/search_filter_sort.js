@@ -16,8 +16,6 @@ $(document).ready(function() {
     var delete_btn = $("#sfs_del_btn");
     var select_all_on_page = $("#select_all_objects_checkbox");
 
-    add_spinner();
-
     $("#paginate_by_select").change(function() {
         paginate_by = [$(this).val()];
         goto_new_url(true, true, true);
@@ -98,8 +96,6 @@ $(document).ready(function() {
             }
         });
     }
-
-    remove_spinner();
 });
 
 // Page number input form size
