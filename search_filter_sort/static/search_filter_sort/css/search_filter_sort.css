@@ -85,15 +85,28 @@
 
 /** Machine Event Reason Manager pagination styles **/
 .page-item.page-of .page-link {
-  color: #000000;
-  background-color: #ffffff;
-  border-color: #dddddd;
-  padding-top: 0;
-  padding-bottom: 0;
+    color: #000000;
+    background-color: #ffffff;
+    border-color: #dddddd;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 input#page_number_text {
-  height: 36px;
-  width: 40px;
-  display: inline-block;
+    height: 36px;
+    width: 40px;
+    display: inline-block;
+}
+
+/** Fontawesome styles **/
+.svg-inline--fa {
+    margin-right: 0.3em;
+}
+
+.svg-inline--fa.fa-fw {
+    margin-right: 0.2em;
+}
+
+.svg-inline--fa.no-right-margin {
+    margin-right: 0;
 }
