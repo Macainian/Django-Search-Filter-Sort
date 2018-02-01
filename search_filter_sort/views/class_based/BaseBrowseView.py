@@ -168,6 +168,9 @@ class BaseBrowseView(ListView):
                 elif "__lte_number" in filter_name or "__lt_number" in filter_name:
                     filter_name = filter_name.replace("__lte_number", "__lte")
                     filter_name = filter_name.replace("__lt_number", "__lt")
+                elif "__lte_date" in filter_name or "__lt_date" in filter_name:
+                    filter_name = filter_name.replace("__lte_date", "__lte")
+                    filter_name = filter_name.replace("__lt_date", "__lt")
 
                 if "__gte_age" in filter_name or "__gt_age" in filter_name:
                     values = [convert_age_to_date(int(filter_values[i]) + 1)]
@@ -176,6 +179,9 @@ class BaseBrowseView(ListView):
                 elif "__gte_number" in filter_name or "__gt_number" in filter_name:
                     filter_name = filter_name.replace("__gte_number", "__gte")
                     filter_name = filter_name.replace("__gt_number", "__gt")
+                elif "__gte_date" in filter_name or "__gt_date" in filter_name:
+                    filter_name = filter_name.replace("__gte_date", "__gte")
+                    filter_name = filter_name.replace("__gt_date", "__gt")
 
                 new_values = []
                 for value in values:
@@ -244,13 +250,19 @@ class BaseBrowseView(ListView):
 
         self.filter_names.append(filter_name)
 
-    def add_number_range_filter(self, html_name, lower_filter_name, upper_filter_name, max_width="50px", step_size="1"):
+    def add_range_filter(self, html_name, filter_name, input_type, step_size="1"):
+        lower_filter_name = filter_name + "__gte_" + input_type
+        upper_filter_name = filter_name + "__lte_" + input_type
+
+        if input_type == "age":
+            input_type = "number"
+
         html_code = \
-            '<input type="number" class="range-filter form-control" id="' + lower_filter_name + '_filter" ' + \
-                'name="' + lower_filter_name + '" step="' + step_size + '" style="max-width: ' + max_width + '" />' + \
+            '<input type="' + input_type + '" class="range-filter form-control" id="' + lower_filter_name + '_filter" ' + \
+            'name="' + lower_filter_name + '" step="' + step_size + '" style="max-width:max-content" />' + \
             '<strong> - </strong>' + \
-            '<input type="number" class="range-filter form-control" id="' + upper_filter_name + '_filter" ' + \
-                'name="' + upper_filter_name + '" step="' + step_size + '" style="max-width: ' + max_width + '" />'
+            '<input type="' + input_type + '" class="range-filter form-control" id="' + upper_filter_name + '_filter" ' + \
+            'name="' + upper_filter_name + '" step="' + step_size + '" style="max-width: max-content" />'
 
         self.filters.append(
         {
