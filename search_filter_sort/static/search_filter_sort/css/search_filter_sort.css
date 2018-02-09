@@ -1,3 +1,4 @@
+/** Table Header Sorting Background Styles **/
 .sorting_none.dark {
     background-image:url("../images/sort_both.png");
     background-repeat: no-repeat;
@@ -54,22 +55,17 @@
 
 .sortable_th .th-container .sort-container {
     display: table-cell;
-    max-width: 14px;
+    max-width: 19px;
     vertical-align: middle;
     padding-left: 6px;
     height: 32px;
+    text-align: center;
 }
 
 .sortable_th .th-container .sort-container .sort-controls {
-    text-align: right;
-    display: table-cell;
+    display: inline-table;
     height: 32px;
-    max-height: 32px;
-    max-width: 14px;
-    width: 14px;
-    margin: 0;
-    padding-left: 1px;
-    vertical-align: middle;
+    width: 19px;
 }
 
 .sortable_th .th-container .sort-container .sort-controls span {
@@ -96,6 +92,67 @@ input#page_number_text {
     height: 36px;
     width: 40px;
     display: inline-block;
+}
+
+/** Specific Styles **/
+#clear_sorts_button {
+    padding-bottom: 0.1rem;
+}
+
+#select_all_pages_checkbox {
+    margin: -2px 0 0 6px;
+}
+
+label[for="select_all_pages_checkbox"] {
+    margin-bottom: 0;
+}
+
+#paginate_by_select {
+    width: 150px;
+}
+
+#search_group {
+    max-width: 400px;
+}
+
+#hidden_filters_message_div {
+    display: none;
+    color: red;
+}
+
+.row#select_per_page_and_search_row, .row#filters_row {
+    margin-bottom: 10px;
+}
+
+#apply_and_clear_filters_buttons {
+    width: 207px;
+}
+
+div.filter-header {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+/** Select Filters Accordion Styles **/
+a.select-filters {
+    color: #000000
+}
+
+a.select-filters:hover {
+    text-decoration: none;
+    color: #000000;
+}
+
+a.select-filters.fa-caret-down {
+    transition: .3s transform ease-in-out;
+}
+
+a.select-filters.collapsed .fa-caret-down {
+    transform: rotate(-90deg);
 }
 
 /** Fontawesome styles **/
