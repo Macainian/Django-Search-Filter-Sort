@@ -134,16 +134,10 @@ class BaseBrowseView(ListView):
 
         if search_bys:
             self.search_by = search_bys
-            search_terms = []
-
-            for term in search_bys.split():
-                search_terms.append(term)
 
             for field in self.searches:
                 field += "__icontains"
-
-                for term in search_terms:
-                    search_list[field] = term
+                search_list[field] = search_bys
         else:
             self.search_by = ""
 
