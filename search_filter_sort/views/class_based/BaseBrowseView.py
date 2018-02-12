@@ -91,6 +91,9 @@ class BaseBrowseView(ListView):
         filter_values = self.request.GET.getlist("filter_value", None)
         sort_bys = self.request.GET.getlist("sort_by", self.default_sort_by)
 
+        if not sort_bys:
+            raise ValueError("The default sort by is not in the view's sorts list")
+
         search_list = self.get_search_list(search_bys)
         filter_list = self.get_filter_list(filter_names, filter_values)
         sort_list = self.get_sort_list(sort_bys)
