@@ -1,26 +1,24 @@
-{% load search_filter_sort_tags %}
-
 {% if is_sortable %}
     <th id="{{ col_type }}_header" onclick="add_sort_by('{{ col_type }}')" data-toggle="tooltip" title="{{ tooltip_title }}"
-        class="sortable_th">
+        class="sortable-th">
         {% if tooltip_title %}
-            {% bootstrap_info_icon tooltip_title %}
+            <i data-toggle="tooltip" title="{{ tooltip_title }}" class="fas fa-info-circle no-right-margin"></i>
         {% endif %}
         <div class="th-container">
             <div class="column-title">{{ col_title }}</div>
             <div class="sort-container">
-                <div class="sort-controls sorting_none {% if sorting_shade %}{{ sorting_shade }}{% else %}dark{% endif %}">
+                <div class="sort-controls sorting-none {% if sorting_shade %}{{ sorting_shade }}{% else %}dark{% endif %}">
                     <span>
-                        <strong id="{{ col_type }}_number" style="display: none"></strong>&nbsp;&nbsp;
+                        <strong id="{{ col_type }}_number"></strong>&nbsp;&nbsp;
                     </span>
                 </div>
             </div>
         </div>
     </th>
 {% else %}
-    <th class="sortable_th" data-toggle="tooltip" title="{{ tooltip_title }}">
+    <th class="sortable-th" data-toggle="tooltip" title="{{ tooltip_title }}">
         {% if tooltip_title %}
-            {% bootstrap_info_icon tooltip_title %}
+            <i data-toggle="tooltip" title="{{ tooltip_title }}" class="fas fa-info-circle no-right-margin"></i>
         {% endif %}
         <div class="th-container">
             <div class="column-title">{{ col_title }}</div>

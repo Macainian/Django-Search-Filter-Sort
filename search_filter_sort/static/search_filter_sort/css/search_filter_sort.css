@@ -1,59 +1,59 @@
 /** Table Header Sorting Background Styles **/
-.sorting_none.dark {
+.sorting-none.dark {
     background-image:url("../images/sort_both.png");
     background-repeat: no-repeat;
     background-position: top 6px right;
 }
 
-.sorting_asc.dark {
+.sorting-asc.dark {
     background-image:url("../images/sort_asc.png");
     background-repeat: no-repeat;
     background-position: top -2px right;
 }
 
-.sorting_desc.dark {
+.sorting-desc.dark {
     background-image:url("../images/sort_desc.png");
     background-repeat: no-repeat;
     background-position: bottom 1px right;
 }
 
-.sorting_none.light {
+.sorting-none.light {
     background-image:url("../images/sort_both_light.png");
     background-repeat: no-repeat;
     background-position: top 6px right;
 }
 
-.sorting_asc.light {
+.sorting-asc.light {
     background-image:url("../images/sort_asc_light.png");
     background-repeat: no-repeat;
     background-position: top -2px right;
 }
 
-.sorting_desc.light {
+.sorting-desc.light {
     background-image:url("../images/sort_desc_light.png");
     background-repeat: no-repeat;
     background-position: bottom 1px right;
 }
 
-.sortable_th {
+.sortable-th {
     border: 1px solid #ddd;
     cursor: default;
     font-size: 0.9em;
 }
 
-.sortable_th .th-container {
+.sortable-th .th-container {
     display: block;
     width: 100%;
     vertical-align: middle;
 }
 
-.sortable_th .th-container .column-title {
+.sortable-th .th-container .column-title {
     display: table-cell;
     width: 100%;
     vertical-align: middle;
 }
 
-.sortable_th .th-container .sort-container {
+.sortable-th .th-container .sort-container {
     display: table-cell;
     max-width: 19px;
     vertical-align: middle;
@@ -62,20 +62,22 @@
     text-align: center;
 }
 
-.sortable_th .th-container .sort-container .sort-controls {
+.sortable-th .th-container .sort-container .sort-controls {
     display: inline-table;
     height: 32px;
     width: 19px;
 }
 
-.sortable_th .th-container .sort-container .sort-controls span {
+.sortable-th .th-container .sort-container .sort-controls span {
     display:table-cell;
     vertical-align: middle;
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 0.8em;
 }
 
-.table thead th.sortable_th {
+.table thead th.sortable-th,
+.table thead th.sfs-th,
+.table tbody td.sfs-td {
     vertical-align: middle;
 }
 
@@ -120,8 +122,20 @@ label[for="select_all_pages_checkbox"] {
     color: red;
 }
 
+#select_all_objects_checkbox {
+    margin: auto;
+}
+
 .row#select_per_page_and_search_row, .row#filters_row {
     margin-bottom: 10px;
+}
+
+.object-list-checkbox {
+    margin: 0 auto;
+}
+
+.sort-controls span strong {
+    display: none;
 }
 
 #apply_and_clear_filters_buttons {

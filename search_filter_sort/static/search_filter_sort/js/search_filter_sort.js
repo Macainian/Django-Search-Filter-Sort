@@ -275,10 +275,10 @@ function set_sort_symbols() {
         sort_by_split = sort_bys[i].split("-");
 
         if(sort_by_split.length === 2) { // Is using -
-            change_sorting_symbol(sort_by_split[1], "sorting_desc");
+            change_sorting_symbol(sort_by_split[1], "sorting-desc");
             sort_text = $("#" + sort_by_split[1] + "_number");
         } else {
-            change_sorting_symbol(sort_bys[i], "sorting_asc");
+            change_sorting_symbol(sort_bys[i], "sorting-asc");
             sort_text = $("#" + sort_bys[i] + "_number");
         }
 
@@ -315,21 +315,21 @@ function add_sort_by(sort_by) {
 
     if(index === -1) { // Not yet in the list, so tack it on the end
         sort_bys.push(sort_by);
-        change_sorting_symbol(sort_by, "sorting_asc");
+        change_sorting_symbol(sort_by, "sorting-asc");
     } else if(index === sort_bys.length - 1) { // If it is currently at the end
         if(sort_bys[index].split("-").length === 2) { // Is using -
 
             sort_bys.splice(index, 1);
-            change_sorting_symbol(sort_by, "sorting_none");
+            change_sorting_symbol(sort_by, "sorting-none");
             $("#" + sort_by + "_number").css("display", "none");
         } else {
             sort_bys[index] = "-" + sort_by;
-            change_sorting_symbol(sort_by, "sorting_desc");
+            change_sorting_symbol(sort_by, "sorting-desc");
         }
     } else { // In the list, but not at the end. Move it to the end in ascending order
         sort_bys.splice(index, 1);
         //sort_bys.push(sort_by);
-        change_sorting_symbol(sort_by, "sorting_none");
+        change_sorting_symbol(sort_by, "sorting-none");
     }
 
     goto_new_url(true, true, true);
@@ -385,9 +385,9 @@ function goto_new_url(should_include_searches, should_include_filters, should_in
 function change_sorting_symbol(base_id, new_class) {
     var sort_to_set = $("#" + base_id + "_header").find(".sort-controls");
 
-    sort_to_set.removeClass("sorting_none");
-    sort_to_set.removeClass("sorting_asc");
-    sort_to_set.removeClass("sorting_desc");
+    sort_to_set.removeClass("sorting-none");
+    sort_to_set.removeClass("sorting-asc");
+    sort_to_set.removeClass("sorting-desc");
 
     sort_to_set.addClass(new_class);
 }

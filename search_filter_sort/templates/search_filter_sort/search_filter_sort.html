@@ -3,13 +3,13 @@
 <div class="row" id="select_per_page_and_search_row">
     <div class="col-md-6">
         <div class="input-group input-group-sm">
-            <label for="paginate_by_select" hidden>Choose Items Per Page</label>
+            <label for="paginate_by_select" hidden>{% trans "Choose Items Per Page" %}</label>
             <select class="custom-select form-control form-control-sm" id="paginate_by_select"
                     aria-labelledby="Select Numbber of Items Per Page">
-                <option value="10" {% if paginate_by == 10 %}selected{% endif %}>10 items per page</option>
-                <option value="25" {% if paginate_by == 25 %}selected{% endif %}>25 items per page</option>
-                <option value="50" {% if paginate_by == 50 %}selected{% endif %}>50 items per page</option>
-                <option value="100" {% if paginate_by == 100 %}selected{% endif %}>100 items per page</option>
+                <option value="10" {% if paginate_by == 10 %}selected{% endif %}>{% trans "10 items per page" %}</option>
+                <option value="25" {% if paginate_by == 25 %}selected{% endif %}>{% trans "25 items per page" %}</option>
+                <option value="50" {% if paginate_by == 50 %}selected{% endif %}>{% trans "50 items per page" %}</option>
+                <option value="100" {% if paginate_by == 100 %}selected{% endif %}>{% trans "100 items per page" %}</option>
             </select>
             <div class="input-group-append">
                 <button class="btn btn-sm" type="button" id="clear_all_button" onclick="clear_all()">
@@ -26,8 +26,8 @@
                     <i class="fas fa-search no-right-margin"></i>
                 </button>
                 <button type="button" class="btn btn-sm" id="clear_search_button"
-                        onclick="clear_search()" disabled>
-                    Clear Search
+                    onclick="clear_search()" disabled>
+                    {% trans "Clear Search" %}
                 </button>
             </div>
         </div>
@@ -50,8 +50,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group input-group-sm float-right" id="apply_and_clear_filters_buttons">
-                                    <button type="button" class="btn btn-default btn-sm" id="apply_filters_button" onclick="apply_filters();"
-                                            disabled> Apply Filters
+                                    <button type="button" class="btn btn-default btn-sm" id="apply_filters_button"
+                                        onclick="apply_filters();" disabled>
+                                        {% trans "Apply Filters" %}
                                     </button>
                                     <button type="button" class="btn btn-default btn-sm" id="clear_filters_button" onclick="clear_filters()"
                                         disabled>
@@ -61,8 +62,8 @@
                             </div>
                             <div class="col-12">
                                 <span id="hidden_filters_message_div">
-                                    <strong> Note: </strong>
-                                    Special hidden filters are currently being applied. To remove them, click clear filters.
+                                    <strong> {% trans "Note" %}: </strong>
+                                    {% trans "Special hidden filters are currently being applied. To remove them, click clear filters." %}
                                 </span>
                             </div>
                         </div>
@@ -101,7 +102,7 @@
         <div class="input-group sfs-all-clear-group input-group-sm">
             <div class="input-group-prepend filter-clear-sort">
                 <div class="input-group-text">
-                    <label for="select_all_pages_checkbox">All in Filter</label>
+                    <label for="select_all_pages_checkbox">{% trans "All in Filter" %}</label>
                     <input type="checkbox" id="select_all_pages_checkbox">
                 </div>
             </div>
@@ -117,12 +118,12 @@
             <div class="input-group sfs-total-group input-group-sm">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        <strong>Total: {{ total_object_count }}</strong>
+                        <strong>{% trans "Total" %}: {{ total_object_count }}</strong>
                     </div>
                 </div>
                 <div class="input-group-append">
                     <div class="input-group-text">
-                        <strong>Filter Total: {{ filtered_object_count }}</strong>
+                        <strong>{% trans "Filter Total" %}: {{ filtered_object_count }}</strong>
                     </div>
                 </div>
             </div>
