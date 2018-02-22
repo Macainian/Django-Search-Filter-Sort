@@ -283,7 +283,7 @@ function set_sort_symbols() {
         }
 
         sort_text.text(i+1);
-        sort_text.css("display", "");
+        sort_text.show();
     }
 }
 
@@ -308,6 +308,9 @@ function fix_range_filters() {
 
 function add_sort_by(sort_by) {
     var index = sort_bys.indexOf(sort_by);
+    var sort_text = $("#" + sort_by + "_number");
+
+    sort_text.hide();
 
     if(index === -1) { // If index is -1, it might still be in the list with a -
         index = sort_bys.indexOf("-" + sort_by);
@@ -321,7 +324,7 @@ function add_sort_by(sort_by) {
 
             sort_bys.splice(index, 1);
             change_sorting_symbol(sort_by, "sorting-none");
-            $("#" + sort_by + "_number").css("display", "none");
+            sort_text.hide();
         } else {
             sort_bys[index] = "-" + sort_by;
             change_sorting_symbol(sort_by, "sorting-desc");
