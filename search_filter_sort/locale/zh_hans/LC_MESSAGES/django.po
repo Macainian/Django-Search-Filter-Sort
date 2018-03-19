@@ -19,102 +19,102 @@ msgstr ""
 
 #: .\website\settings.py:124
 msgid "English"
-msgstr ""
+msgstr "测试"
 
 #: .\website\settings.py:125
 msgid "Traditional Chinese"
-msgstr ""
+msgstr "测试"
 
 #: .\website\settings.py:126
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:12
 msgid "First"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:26
 msgid "Previous"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:53
 msgid "Page"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:56
 msgid "of"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:63
 msgid "Next"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:77
 msgid "Last"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:6
 msgid "Choose Items Per Page"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:8
 msgid "10 Items Per Page"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:9
 msgid "25 Items Per Page"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:10
 msgid "50 Items Per Page"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:11
 msgid "100 Items Per Page"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:15
 msgid "Clear All"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:29
 msgid "Clear Search"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:46
 msgid "Filters"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:54
 msgid "Apply Filters"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:58
 msgid "Clear Filters"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:64
 msgid "Note"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:65
 msgid ""
 "Special hidden filters are currently being applied. To remove them, click "
 "clear filters."
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:104
 msgid "All In Filter"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:110
 msgid "Clear Sorts"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:120
 msgid "Total"
-msgstr ""
+msgstr "测试"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:125
 msgid "Filter Total"
-msgstr ""
+msgstr "测试"
