@@ -4,12 +4,11 @@
     <div class="col-md-6">
         <div class="input-group input-group-sm">
             <label for="paginate_by_select" hidden>{% trans "Choose Items Per Page" %}</label>
-            <select class="custom-select form-control form-control-sm" id="paginate_by_select"
-                    aria-labelledby="Select Numbber of Items Per Page">
-                <option value="10" {% if paginate_by == 10 %}selected{% endif %}>{% trans "10 items per page" %}</option>
-                <option value="25" {% if paginate_by == 25 %}selected{% endif %}>{% trans "25 items per page" %}</option>
-                <option value="50" {% if paginate_by == 50 %}selected{% endif %}>{% trans "50 items per page" %}</option>
-                <option value="100" {% if paginate_by == 100 %}selected{% endif %}>{% trans "100 items per page" %}</option>
+            <select class="custom-select form-control form-control-sm" id="paginate_by_select" aria-labelledby="Select Number Of Items Per Page">
+                <option value="10" {% if paginate_by == 10 %}selected{% endif %}>{% trans "10 Items Per Page" %}</option>
+                <option value="25" {% if paginate_by == 25 %}selected{% endif %}>{% trans "25 Items Per Page" %}</option>
+                <option value="50" {% if paginate_by == 50 %}selected{% endif %}>{% trans "50 Items Per Page" %}</option>
+                <option value="100" {% if paginate_by == 100 %}selected{% endif %}>{% trans "100 Items Per Page" %}</option>
             </select>
             <div class="input-group-append">
                 <button class="btn btn-sm" type="button" id="clear_all_button" onclick="clear_all()">
@@ -102,7 +101,7 @@
         <div class="input-group sfs-all-clear-group input-group-sm">
             <div class="input-group-prepend filter-clear-sort">
                 <div class="input-group-text">
-                    <label for="select_all_pages_checkbox">{% trans "All in Filter" %}</label>
+                    <label for="select_all_pages_checkbox">{% trans "All In Filter" %}</label>
                     <input type="checkbox" id="select_all_pages_checkbox">
                 </div>
             </div>
