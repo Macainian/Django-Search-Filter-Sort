@@ -62,7 +62,8 @@ target/
 *.sqlite3
 
 website/local_settings.py
-
+website/media/*
+!website/media/.gitkeep
 
 # Vagrant configuration
 .vagrant
