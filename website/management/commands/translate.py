@@ -20,6 +20,7 @@
     Add LANGUAGE_IGNORE_PATTERNS = [] to you settings file for custom ignore
     patterns
 """
+import os
 from django.conf import settings as django_settings
 from django.core.management.base import BaseCommand
 from django.core import management
@@ -27,6 +28,7 @@ from django.core import management
 
 class Command(BaseCommand):
     settings = django_settings
+    full_locale_path = ""
     ignore_patterns = ['node_modules/*']
     help = "Runs command makemessages for all domains"
     languages = None
@@ -67,14 +69,14 @@ class Command(BaseCommand):
             ignore_patterns = Command.ignore_patterns
 
         self.languages = [seq[0] for seq in self.settings.LANGUAGES]
-        # self.full_local_locale_path = os.path.join(self.settings.BASE_DIR, "website", "locale")
+        self.full_locale_path = os.path.join(self.settings.BASE_DIR, "search_filter_sort", "locale")
 
         po_list = []
         should_make_django = True
         should_make_djangojs = True
         should_compile = False
 
-        # self.rename_locale_folders("_", "-")
+        self.rename_locale_folders("_", "-")
 
         if options['no-django']:
             should_make_django = False
@@ -103,13 +105,13 @@ class Command(BaseCommand):
             self.stdout.write("Compiling All Translation Files")
             management.call_command('compilemessages', local=self.languages)
 
-        # self.rename_locale_folders("-", "_")
+        self.rename_locale_folders("-", "_")
 
-    # def rename_locale_folders(self, old_folder_splitter, new_folder_splitter):
-    #     for language in self.languages:
-    #         old_language_folder_name = language.replace(new_folder_splitter, old_folder_splitter)
-    #         new_language_folder_name = language.replace(old_folder_splitter, new_folder_splitter)
-    #
-    #         old_full_locale_file_path = os.path.join(self.full_local_locale_path, old_language_folder_name)
-    #         new_full_locale_file_path = os.path.join(self.full_local_locale_path, new_language_folder_name)
-    #         os.rename(old_full_locale_file_path, new_full_locale_file_path)
+    def rename_locale_folders(self, old_folder_splitter, new_folder_splitter):
+        for language in self.languages:
+            old_language_folder_name = language.replace(new_folder_splitter, old_folder_splitter)
+            new_language_folder_name = language.replace(old_folder_splitter, new_folder_splitter)
+
+            old_full_locale_file_path = os.path.join(self.full_locale_path, old_language_folder_name)
+            new_full_locale_file_path = os.path.join(self.full_locale_path, new_language_folder_name)
+            os.rename(old_full_locale_file_path, new_full_locale_file_path)

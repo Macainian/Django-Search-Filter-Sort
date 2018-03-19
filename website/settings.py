@@ -116,6 +116,7 @@ USE_L10N = True
 
 # For *.po and *.mo files
 LOCALE_PATHS = (
+    os.path.join("search_filter_sort", "locale"),
 )
 
 # Languages currently being used for translation purposes
