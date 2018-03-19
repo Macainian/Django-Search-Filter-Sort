@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.utils.translation import ugettext_lazy
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -106,14 +108,30 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
+# Internationalization
+# https://docs.djangoproject.com/en/1.11/topics/i18n/
+LANGUAGE_CODE = "en"
 USE_I18N = True
-
 USE_L10N = True
 
+# For *.po and *.mo files
+LOCALE_PATHS = (
+)
+
+# Languages currently being used for translation purposes
+LANGUAGES = [
+    ("en", ugettext_lazy("English")),
+    ("zh-hant", ugettext_lazy("Traditional Chinese")),
+    ("zh-hans", ugettext_lazy("Simplified Chinese"))
+]
+
+# Ignore files or directories when translating (makemessages, compilemessages)
+LANGUAGE_IGNORE_PATTERNS = [
+    "django_search_filter_sort.egg-info/*"
+]
+
+
+# Timezone
 USE_TZ = True
 
 
@@ -122,4 +140,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)

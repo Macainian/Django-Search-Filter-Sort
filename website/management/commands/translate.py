@@ -20,23 +20,17 @@
     Add LANGUAGE_IGNORE_PATTERNS = [] to you settings file for custom ignore
     patterns
 """
-import os
-
 from django.conf import settings as django_settings
 from django.core.management.base import BaseCommand
 from django.core import management
 
 
 class Command(BaseCommand):
-    SHARED_NAME = "plantstar_shared"
-
     settings = django_settings
     ignore_patterns = ['node_modules/*']
     help = "Runs command makemessages for all domains"
     languages = None
     is_shared = False
-    full_plantstar_shared_locale_path = None
-    full_local_locale_path = None
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -72,8 +66,7 @@ class Command(BaseCommand):
         else:
             ignore_patterns = Command.ignore_patterns
 
-        # self.languages = [seq[0] for seq in self.settings.LANGUAGES]
-        # self.full_plantstar_shared_locale_path = os.path.join(self.settings.BASE_DIR, "website", "apps", "plantstar_shared", "base_app", "locale")
+        self.languages = [seq[0] for seq in self.settings.LANGUAGES]
         # self.full_local_locale_path = os.path.join(self.settings.BASE_DIR, "website", "locale")
 
         po_list = []
@@ -94,6 +87,8 @@ class Command(BaseCommand):
             should_make_djangojs = False
             should_compile = True
 
+        print(self.languages)
+
         if should_make_django:
             self.stdout.write("Translating Python and template files")
             management.call_command('makemessages', locale=self.languages, domain='django', ignore=ignore_patterns)
@@ -110,16 +105,11 @@ class Command(BaseCommand):
 
         # self.rename_locale_folders("-", "_")
 
-    def rename_locale_folders(self, old_folder_splitter, new_folder_splitter):
-        for language in self.languages:
-            old_language_folder_name = language.replace(new_folder_splitter, old_folder_splitter)
-            new_language_folder_name = language.replace(old_folder_splitter, new_folder_splitter)
-
-            old_full_plantstar_shared_file_path = os.path.join(self.full_plantstar_shared_locale_path, old_language_folder_name)
-            new_full_plantstar_shared_file_path = os.path.join(self.full_plantstar_shared_locale_path, new_language_folder_name)
-            os.rename(old_full_plantstar_shared_file_path, new_full_plantstar_shared_file_path)
-
-            if not self.is_shared:
-                old_full_locale_file_path = os.path.join(self.full_local_locale_path, old_language_folder_name)
-                new_full_locale_file_path = os.path.join(self.full_local_locale_path, new_language_folder_name)
-                os.rename(old_full_locale_file_path, new_full_locale_file_path)
+    # def rename_locale_folders(self, old_folder_splitter, new_folder_splitter):
+    #     for language in self.languages:
+    #         old_language_folder_name = language.replace(new_folder_splitter, old_folder_splitter)
+    #         new_language_folder_name = language.replace(old_folder_splitter, new_folder_splitter)
+    #
+    #         old_full_locale_file_path = os.path.join(self.full_local_locale_path, old_language_folder_name)
+    #         new_full_locale_file_path = os.path.join(self.full_local_locale_path, new_language_folder_name)
+    #         os.rename(old_full_locale_file_path, new_full_locale_file_path)
