@@ -1,4 +1,5 @@
 include README.md LICENSE
 
+recursive-include search_filter_sort/locale *
 recursive-include search_filter_sort/static *
 recursive-include search_filter_sort/templates *
