@@ -17,6 +17,9 @@
     https://github.com/charlwillia6
     https://gist.github.com/charlwillia6/9b1e311dd6747c867631e6cde1c527aa
 
+    Modified by Rob Hostetler
+    https://github.com/Macainian
+
     Add LANGUAGE_IGNORE_PATTERNS = [] to you settings file for custom ignore
     patterns
 """
@@ -31,7 +34,7 @@ class Command(BaseCommand):
     full_locale_path = ""
     ignore_patterns = ['node_modules/*']
     help = "Runs command makemessages for all domains"
-    languages = None
+    language_names = None
     is_shared = False
 
     def add_arguments(self, parser):
@@ -68,15 +71,13 @@ class Command(BaseCommand):
         else:
             ignore_patterns = Command.ignore_patterns
 
-        self.languages = [seq[0] for seq in self.settings.LANGUAGES]
+        self.language_names = [language_tuple[0] for language_tuple in self.settings.LANGUAGES]
         self.full_locale_path = os.path.join(self.settings.BASE_DIR, "search_filter_sort", "locale")
 
         po_list = []
         should_make_django = True
         should_make_djangojs = True
         should_compile = False
-
-        self.rename_locale_folders("_", "-")
 
         if options['no-django']:
             should_make_django = False
@@ -89,29 +90,62 @@ class Command(BaseCommand):
             should_make_djangojs = False
             should_compile = True
 
-        print(self.languages)
+        if should_compile:
+            self.stdout.write("Compiling All Translation Files")
+            management.call_command('compilemessages', local=self.language_names)
+            return
+
+        self.rename_locale_folders("-")
 
         if should_make_django:
             self.stdout.write("Translating Python and template files")
-            management.call_command('makemessages', locale=self.languages, domain='django', ignore=ignore_patterns)
+            management.call_command('makemessages', locale=self.language_names, domain='django', ignore=ignore_patterns)
             po_list.append("django.po")
 
         if should_make_djangojs:
             self.stdout.write("Translating JavaScript files")
-            management.call_command('makemessages', locale=self.languages, domain='djangojs', ignore=ignore_patterns)
+            management.call_command('makemessages', locale=self.language_names, domain='djangojs', ignore=ignore_patterns)
             po_list.append("djangojs.po")
 
-        if should_compile:
-            self.stdout.write("Compiling All Translation Files")
-            management.call_command('compilemessages', local=self.languages)
+        self.rename_locale_folders("_")
 
-        self.rename_locale_folders("-", "_")
+    def rename_locale_folders(self, new_folder_splitter):
+        for language_name in self.language_names:
 
-    def rename_locale_folders(self, old_folder_splitter, new_folder_splitter):
-        for language in self.languages:
-            old_language_folder_name = language.replace(new_folder_splitter, old_folder_splitter)
-            new_language_folder_name = language.replace(old_folder_splitter, new_folder_splitter)
+            if new_folder_splitter == "-":
+                old_language_folder_name = self.convert_language_code_to_folder_format(language_name)
+                new_language_folder_name = self.convert_folder_format_to_language_code(language_name)
+            else:
+                old_language_folder_name = self.convert_folder_format_to_language_code(language_name)
+                new_language_folder_name = self.convert_language_code_to_folder_format(language_name)
 
             old_full_locale_file_path = os.path.join(self.full_locale_path, old_language_folder_name)
             new_full_locale_file_path = os.path.join(self.full_locale_path, new_language_folder_name)
             os.rename(old_full_locale_file_path, new_full_locale_file_path)
+
+    def convert_language_code_to_folder_format(self, language_code):
+        language_code_split = language_code.split("-")
+
+        if len(language_code_split) == 1:
+            return language_code
+
+        main_language_code = language_code_split[0]
+        sub_language_code = language_code_split[1]
+
+        if len(sub_language_code) == 2:
+            sub_language_code = sub_language_code.upper()
+        else:
+            sub_language_code = sub_language_code.title()
+
+        return main_language_code + "_" + sub_language_code
+
+    def convert_folder_format_to_language_code(self, folder_format):
+        folder_format_split = folder_format.split("_")
+
+        if len(folder_format_split) == 1:
+            return folder_format
+
+        main_folder_format = folder_format_split[0]
+        sub_folder_format = folder_format_split[1].lower()
+
+        return main_folder_format + "-" + sub_folder_format
