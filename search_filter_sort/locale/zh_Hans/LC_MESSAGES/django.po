@@ -1,0 +1,120 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-19 10:18-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\website\settings.py:124
+msgid "English"
+msgstr "测试"
+
+#: .\website\settings.py:125
+msgid "Traditional Chinese"
+msgstr "测试"
+
+#: .\website\settings.py:126
+msgid "Simplified Chinese"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:12
+msgid "First"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:26
+msgid "Previous"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:53
+msgid "Page"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:56
+msgid "of"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:63
+msgid "Next"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:77
+msgid "Last"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:6
+msgid "Choose Items Per Page"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:8
+msgid "10 Items Per Page"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:9
+msgid "25 Items Per Page"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:10
+msgid "50 Items Per Page"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:11
+msgid "100 Items Per Page"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:15
+msgid "Clear All"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:29
+msgid "Clear Search"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:46
+msgid "Filters"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:54
+msgid "Apply Filters"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:58
+msgid "Clear Filters"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:64
+msgid "Note"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:65
+msgid ""
+"Special hidden filters are currently being applied. To remove them, click "
+"clear filters."
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:104
+msgid "All In Filter"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:110
+msgid "Clear Sorts"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:120
+msgid "Total"
+msgstr "测试"
+
+#: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:125
+msgid "Filter Total"
+msgstr "测试"
