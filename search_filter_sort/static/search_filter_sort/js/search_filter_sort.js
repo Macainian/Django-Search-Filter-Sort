@@ -31,12 +31,12 @@ $(document).ready(function() {
         page_num_input_form_size(page_number_text);
     });
 
-    $(window).keydown(function(event) {
-        if(event.keyCode === 13 && $("#search_text").is(":focus")) {
+    $(window).keydown(function(e) {
+        if(e.keyCode === 13 && $("#search_text").is(":focus")) {
             search();
         }
 
-        if(event.keyCode === 13 && page_number_text.is(":focus")) {
+        if(e.keyCode === 13 && page_number_text.is(":focus")) {
             goto_page(page_number_text.val());
         }
     });
@@ -112,19 +112,20 @@ function set_filter_mousedown_functions() {
     var split_filters;
     var filter_name;
     var filter_quantity_span;
+    var select = null;
 
     // Fixes selection bugs when you click on the slider or empty space.
-    $("select.multi-select").mousedown(function(event) {
-        return false;
-    });
+    $("select.multi-select").mousedown(function(e) {
+        e.preventDefault();
+        select = this;
+        $(select).focus();
+        // This is necessary to fix "click and drag scrolling on the options" bug in Chrome
+    }).mousemove(function(e) {e.preventDefault();});
 
     var options = $("select.multi-select option");
-    // This is necessary to fix "click and drag scrolling on the options" bug in Chrome
-    options.mousemove(function(event) {
-        return false;
-    });
 
-    options.click(function(event) {
+    options.click(function() {
+        var scroll = select.scrollTop;
         filter_name = $(this).parent().attr("name").split("_filter")[0];
         filter_quantity_span = $("#" + filter_name + "_quantity_span");
 
@@ -153,6 +154,9 @@ function set_filter_mousedown_functions() {
             filter_quantity_span.text("(" + filter_bys[filter_name].split(",").length + ")");
         }
 
+        // This is necessary to fix "click and drag scrolling on the options" bug in Chrome
+        setTimeout(function() {select.scrollTop = scroll;}, 0);
+
         set_filter_button_states();
 
         return false;
@@ -163,7 +167,7 @@ function set_filter_keydown_functions() {
     var input_length;
     var filter_name;
 
-    $("input.range-filter").on("input", function(event) {
+    $("input.range-filter").on("input", function() {
         input_length = $(this).val().length;
         filter_name = $(this).attr("name").split("-filter")[0];
 
