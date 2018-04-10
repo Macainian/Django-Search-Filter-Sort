@@ -235,7 +235,7 @@ class BaseBrowseView(ListView):
         self.filter_names = []
 
     def add_select_filter(self, html_name, filter_name, html_options_code):
-        html_code = '<select class="multi-select form-control" id="' + filter_name + '_filter" name="' + filter_name + '_filter" autocomplete="off" multiple>'
+        html_code = '<select class="multi-select form-control sfs-filter" id="' + filter_name + '_filter" name="' + filter_name + '_filter" autocomplete="off" multiple>'
         html_code += html_options_code + '</select>'
 
         self.filters.append(

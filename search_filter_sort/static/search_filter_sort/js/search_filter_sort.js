@@ -115,14 +115,14 @@ function set_filter_mousedown_functions() {
     var select = null;
 
     // Fixes selection bugs when you click on the slider or empty space.
-    $("select.multi-select").mousedown(function(e) {
+    $("select.multi-select.sfs-filter").mousedown(function(e) {
         e.preventDefault();
         select = this;
         $(select).focus();
         // This is necessary to fix "click and drag scrolling on the options" bug in Chrome
     }).mousemove(function(e) {e.preventDefault();});
 
-    var options = $("select.multi-select option");
+    var options = $("select.multi-select.sfs-filter option");
 
     options.click(function() {
         var scroll = select.scrollTop;
