@@ -53,7 +53,7 @@
                                 {% trans 'Page' %}
                                 <label for="page_number_text" hidden></label>
                                 <input type="text" id="page_number_text" pattern="\d+" value="{{ page_obj.number }}" class="form-control"/>
-                                {% trans 'of' %} {{ page_obj.paginator.num_pages }}
+                                &#47; {{ page_obj.paginator.num_pages }}
                             </span>
                         </li>
                     {% if page_obj.has_next %}
