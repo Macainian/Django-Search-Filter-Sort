@@ -1,15 +1,16 @@
-// default_pagination comes in via django and must be set before including this file
-
 var can_do_enter_button_form_submissions = true;  // Used to override base.js in website
-var paginate_by = [default_pagination];
-var page_number = 1;
 var search_bys = [];
 var filter_bys = {};
 var original_filter_bys = {};
 var range_filters = {};
 var sort_bys = [];
+var paginate_by = [];
+var page_number = 1;
 
-$(document).ready(function() {
+// default_pagination comes in via django and must be set before including this file
+function initialize_search_filter_sort() {
+    paginate_by = [default_pagination];
+
     var page_number_text = $("#page_number_text");
     var select_all_pages_checkbox = $("#select_all_pages_checkbox");
     var object_list_checkbox = $(".object-list-checkbox");
@@ -96,7 +97,7 @@ $(document).ready(function() {
             }
         });
     }
-});
+}
 
 // Page number input form size
 function page_num_input_form_size(page_number_text) {
