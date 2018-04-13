@@ -2,119 +2,119 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-19 10:18-0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2018-04-12 08:46-0400\n"
+"PO-Revision-Date: 2018-04-11 11:19+0800\n"
+"Last-Translator: Tseng Yu Chia <blackmei2631@gmail.com>\n"
+"Language-Team: \n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: .\website\settings.py:124
 msgid "English"
-msgstr ""
+msgstr "英語"
 
 #: .\website\settings.py:125
 msgid "Traditional Chinese"
-msgstr ""
+msgstr "繁體中文"
 
 #: .\website\settings.py:126
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "简体中文"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:12
 msgid "First"
-msgstr ""
+msgstr "第一頁"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:26
 msgid "Previous"
-msgstr ""
+msgstr "前一頁"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:53
 msgid "Page"
-msgstr ""
+msgstr "頁"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:56
 msgid "of"
-msgstr ""
+msgstr "/"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:63
 msgid "Next"
-msgstr ""
+msgstr "下一頁"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:77
 msgid "Last"
-msgstr ""
+msgstr "最後一頁"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:6
 msgid "Choose Items Per Page"
-msgstr ""
+msgstr "選擇每頁顯示項目數"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:8
 msgid "10 Items Per Page"
-msgstr ""
+msgstr "每頁10個項目"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:9
 msgid "25 Items Per Page"
-msgstr ""
+msgstr "每頁25個項目"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:10
 msgid "50 Items Per Page"
-msgstr ""
+msgstr "每頁50個項目"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:11
 msgid "100 Items Per Page"
-msgstr ""
+msgstr "每頁100個項目"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:15
 msgid "Clear All"
-msgstr ""
+msgstr "清除全部"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:29
 msgid "Clear Search"
-msgstr ""
+msgstr "清除搜尋"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:46
 msgid "Filters"
-msgstr ""
+msgstr "篩選"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:54
 msgid "Apply Filters"
-msgstr ""
+msgstr "開始篩選"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:58
 msgid "Clear Filters"
-msgstr ""
+msgstr "清除篩選"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:64
 msgid "Note"
-msgstr ""
+msgstr "備註"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:65
 msgid ""
 "Special hidden filters are currently being applied. To remove them, click "
 "clear filters."
-msgstr ""
+msgstr "部分隱藏的篩選已經被執行。要刪除它們，請點擊清除篩選。"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:104
 msgid "All In Filter"
-msgstr ""
+msgstr "全部篩選"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:110
 msgid "Clear Sorts"
-msgstr ""
+msgstr "清除排序"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:120
 msgid "Total"
-msgstr ""
+msgstr "全部"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:125
 msgid "Filter Total"
-msgstr ""
+msgstr "已篩選"
