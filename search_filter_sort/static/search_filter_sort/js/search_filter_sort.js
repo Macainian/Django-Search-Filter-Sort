@@ -413,6 +413,7 @@ function set_filter_button_states() {
         // Enable the clear and apply buttons
         clear_filters_button.prop("disabled", false);
         apply_filters_button.prop("disabled", false);
+        $("#collapse_one").collapse("show");
     }
 }
 
