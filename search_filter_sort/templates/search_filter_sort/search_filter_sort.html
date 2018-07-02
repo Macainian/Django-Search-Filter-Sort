@@ -17,20 +17,24 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 ">
-        <div class="input-group input-group-sm float-right" id="search_group">
-            <input type="text" class="form-control float-right" id="search_text" value="{{ search_by }}" autocomplete="off">
-            <div class="input-group-append">
-                <button type="button" class="btn btn-sm" onclick="search()">
-                    <i class="fas fa-search no-right-margin"></i>
-                </button>
-                <button type="button" class="btn btn-sm" id="clear_search_button"
-                    onclick="clear_search()" disabled>
-                    {% trans "Clear Search" %}
-                </button>
+    {% if should_hide_search %}
+        <div class="col-md-6"></div>
+    {% else %}
+        <div class="col-md-6">
+            <div class="input-group input-group-sm float-right" id="search_group">
+                <input type="text" class="form-control float-right" id="search_text" value="{{ search_by }}" autocomplete="off">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-sm" onclick="search()">
+                        <i class="fas fa-search no-right-margin"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm" id="clear_search_button"
+                        onclick="clear_search()" disabled>
+                        {% trans "Clear Search" %}
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 </div>
 <div class="row" id="filters_row">
     <div class="col-12">
