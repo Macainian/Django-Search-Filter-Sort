@@ -33,11 +33,11 @@ function initialize_search_filter_sort() {
     });
 
     $(window).keydown(function(e) {
-        if(e.keyCode === 13 && $("#search_text").is(":focus")) {
+        if(e.key === 13 && $("#search_text").is(":focus")) {
             search();
         }
 
-        if(e.keyCode === 13 && page_number_text.is(":focus")) {
+        if(e.key === 13 && page_number_text.is(":focus")) {
             goto_page(page_number_text.val());
         }
     });
