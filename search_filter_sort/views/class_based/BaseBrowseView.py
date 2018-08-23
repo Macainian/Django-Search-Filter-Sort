@@ -1,7 +1,10 @@
 import operator
 import logging
+import json
 from functools import reduce
 
+from django.http import Http404, HttpResponse
+from django.utils.translation import ugettext
 from django.db.models import Q
 from django.http.response import HttpResponseRedirect
 from django.views.generic import ListView
@@ -52,6 +55,20 @@ class BaseBrowseView(ListView):
                 raise
 
             return HttpResponseRedirect(request.path)
+        # Error checking - returns JSON, but if this exception is not raised then HTML is usually the response content type
+        except (Http404):
+            url_args = request.GET.copy()
+            invalid_page = url_args["page"]
+            url_args["page"] = 1
+
+            return HttpResponse(json.dumps({
+                "message": ugettext("<strong>Invalid Page:</strong> Page {invalid_page} does not exist.<br><em>You will be redirected back to page {page}.</em>")
+                    .format(invalid_page=invalid_page, page=url_args["page"]),
+                "status": "failed",
+                "alert_status": "alert-info",
+                "page": url_args["page"],
+                "request_path": "{request_path}?{url_args}".format(request_path=request.path, url_args=url_args.urlencode())
+            }), content_type="application/json")
 
     def get_context_data(self, **kwargs):
         context = super(BaseBrowseView, self).get_context_data(**kwargs)
