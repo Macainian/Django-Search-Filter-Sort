@@ -32,6 +32,8 @@ class BaseBrowseView(ListView):
     sorts = []
     default_sort_by = ["-id"]
     default_pagination = 25
+    show_all_in_filter = True
+    show_clear_sorts = True
 
     search_by = None
     using_filters = None
@@ -82,6 +84,8 @@ class BaseBrowseView(ListView):
         context["default_pagination"] = self.default_pagination
         context["filtered_object_count"] = self.filtered_object_count
         context["total_object_count"] = self.model.objects.count()
+        context["show_all_in_filter"] = self.show_all_in_filter
+        context["show_clear_sorts"] = self.show_clear_sorts
 
         return context
 

@@ -103,17 +103,21 @@
 <div class="row" id="table_sort_and_filter_select_row">
     <div class="col-sm-6">
         <div class="input-group sfs-all-clear-group input-group-sm">
-            <div class="input-group-prepend filter-clear-sort">
-                <div class="input-group-text">
-                    <label for="select_all_pages_checkbox">{% trans "All In Filter" %}</label>
-                    <input type="checkbox" id="select_all_pages_checkbox">
+            {% if show_all_in_filter %}
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label for="select_all_pages_checkbox">{% trans "All In Filter" %}</label>
+                        <input type="checkbox" id="select_all_pages_checkbox">
+                    </div>
                 </div>
-            </div>
-            <div class="input-group-append">
-                <button class="btn btn-sm" type="button" id="clear_sorts_button" onclick="clear_sorts()" disabled>
-                        <i class="fas fa-arrows-alt-v"></i>{% trans "Clear Sorts" %}
-                </button>
-            </div>
+            {% endif %}
+            {% if show_clear_sorts %}
+                <div class="input-group-append">
+                    <button class="btn btn-sm" type="button" id="clear_sorts_button" onclick="clear_sorts()" disabled>
+                            <i class="fas fa-arrows-alt-v"></i>{% trans "Clear Sorts" %}
+                    </button>
+                </div>
+            {% endif %}
         </div>
     </div>
     <div class="col-sm-6">
@@ -124,11 +128,13 @@
                         <strong>{% trans "Total" %}: {{ total_object_count }}</strong>
                     </div>
                 </div>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <strong>{% trans "Filter Total" %}: {{ filtered_object_count }}</strong>
+                {% if filters and show_all_in_filter %}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <strong>{% trans "Filter Total" %}: {{ filtered_object_count }}</strong>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
