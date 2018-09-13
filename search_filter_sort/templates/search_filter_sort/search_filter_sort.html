@@ -128,7 +128,7 @@
                         <strong>{% trans "Total" %}: {{ total_object_count }}</strong>
                     </div>
                 </div>
-                {% if filters and show_all_in_filter %}
+                {% if filters or show_all_in_filter %}
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <strong>{% trans "Filter Total" %}: {{ filtered_object_count }}</strong>
