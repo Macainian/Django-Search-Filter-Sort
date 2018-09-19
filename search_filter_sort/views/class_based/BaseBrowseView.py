@@ -1,6 +1,7 @@
 import operator
 import logging
 import json
+import re
 from functools import reduce
 
 from django.http import Http404, HttpResponse
@@ -147,6 +148,12 @@ class BaseBrowseView(ListView):
             queryset = self.model.objects.filter(filter_reduce).distinct().order_by(*sort_list)
         else:
             queryset = self.model.objects.order_by(*sort_list)
+            # queryset = sorted(self.model.objects.all(), key=lambda x: [int(t) if t.isdigit() else t.lower() for t in re.split('(\d+)', x.name)])
+
+        # TODO: Find a way to natural sort the queryset
+        # SELECT * FROM job
+        # ORDER BY(substring('name', '^[0-9]+'))::int -- cast to integer\
+        #     , coalesce(substring('name', '[^0-9_].*$'), '')
 
         self.filtered_object_count = queryset.count()
 
