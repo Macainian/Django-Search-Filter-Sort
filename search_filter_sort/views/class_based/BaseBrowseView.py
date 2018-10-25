@@ -33,6 +33,7 @@ class BaseBrowseView(ListView):
     sorts = []
     default_sort_by = ["-id"]
     default_pagination = 25
+    deferments = []
     show_all_in_filter = True
     show_clear_sorts = True
 
@@ -141,13 +142,13 @@ class BaseBrowseView(ListView):
             self.using_filters = False
 
         if search_reduce and filter_reduce:
-            queryset = self.model.objects.filter(search_reduce).filter(filter_reduce).distinct().order_by(*sort_list)
+            queryset = self.model.objects.filter(search_reduce).filter(filter_reduce).defer(*self.deferments).distinct().order_by(*sort_list)
         elif search_reduce:
-            queryset = self.model.objects.filter(search_reduce).distinct().order_by(*sort_list)
+            queryset = self.model.objects.filter(search_reduce).defer(*self.deferments).distinct().order_by(*sort_list)
         elif filter_reduce:
-            queryset = self.model.objects.filter(filter_reduce).distinct().order_by(*sort_list)
+            queryset = self.model.objects.filter(filter_reduce).defer(*self.deferments).distinct().order_by(*sort_list)
         else:
-            queryset = self.model.objects.order_by(*sort_list)
+            queryset = self.model.objects.defer(*self.deferments).order_by(*sort_list)
             # queryset = sorted(self.model.objects.all(), key=lambda x: [int(t) if t.isdigit() else t.lower() for t in re.split('(\d+)', x.name)])
 
         # TODO: Find a way to natural sort the queryset
