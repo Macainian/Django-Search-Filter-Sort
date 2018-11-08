@@ -14,7 +14,7 @@ function initialize_search_filter_sort() {
     var page_number_text = $("#page_number_text");
     var select_all_pages_checkbox = $("#select_all_pages_checkbox");
     var object_list_checkbox = $(".object-list-checkbox");
-    var delete_btn = $("#sfs_del_btn");
+    var action_btns = $(".sfs-action-btn");
     var select_all_on_page = $("#select_all_objects_checkbox");
 
     $("#paginate_by_select").change(function() {
@@ -74,29 +74,30 @@ function initialize_search_filter_sort() {
         $("#clear_sorts_button").prop("disabled", false);
     }
 
-    if(delete_btn.length){
-        select_all_on_page.change(function() {
-            if(object_list_checkbox.length > 0) {
-                delete_btn.attr("disabled", !this.checked);
-            }
-        });
+    select_all_on_page.change(function()
+    {
+        if (object_list_checkbox.length > 0) {
+            action_btns.attr("disabled", !this.checked);
+        }
+    });
 
-        select_all_pages_checkbox.change(function() {
-            if(object_list_checkbox.length > 0) {
-                delete_btn.attr("disabled", !this.checked);
-            }
-        });
+    select_all_pages_checkbox.change(function()
+    {
+        if (object_list_checkbox.length > 0) {
+            action_btns.attr("disabled", !this.checked);
+        }
+    });
 
-        object_list_checkbox.change(function() {
-            if(select_all_on_page.is(":not(:checked)")) {
-                if(!$("table").find($(".object-list-checkbox:checked")).length > 0) {
-                    delete_btn.attr("disabled", "disabled");
-                } else {
-                    delete_btn.removeAttr("disabled");
-                }
+    object_list_checkbox.change(function()
+    {
+        if(select_all_on_page.is(":not(:checked)")) {
+            if(!$("table").find($(".object-list-checkbox:checked")).length > 0) {
+                action_btns.attr("disabled", "disabled");
+            } else {
+                action_btns.removeAttr("disabled");
             }
-        });
-    }
+        }
+    });
 }
 
 // Page number input form size
