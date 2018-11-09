@@ -33,17 +33,17 @@
                             </a>
                         </li>
                     {% endif %}
-                    {% for page in page_obj.paginator.page_range %}
-                        {% if page_obj.number == page %}
+                    {% for page_number in pagination_page_navigation_range %}
+                        {% if page_obj.number == page_number %}
                             <li class="page-item active">
                                  <span class="page-link">
-                                     {{ page }}
+                                     <strong>{{ page_number }}</strong>
                                  </span>
                             </li>
-                        {% elif page > page_obj.number|add:"-4" and page < page_obj.number|add:"4" %}
+                        {% elif page_number > 0 and page_number <= page_obj.paginator.num_pages %}
                             <li class="page-item">
-                                 <a href="#" class="page-link" onclick="goto_page({{ page }})" aria-label="Page {{ page }}">
-                                     {{ page }}
+                                 <a href="#" class="page-link" onclick="goto_page({{ page_number }})" aria-label="Page {{ page_number }}">
+                                     {{ page_number }}
                                  </a>
                             </li>
                         {% endif %}

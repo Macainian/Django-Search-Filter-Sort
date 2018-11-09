@@ -88,6 +88,8 @@ class BaseBrowseView(ListView):
         context["total_object_count"] = self.model.objects.count()
         context["show_all_in_filter"] = self.show_all_in_filter
         context["show_clear_sorts"] = self.show_clear_sorts
+        page_obj = context["page_obj"]
+        context["pagination_page_navigation_range"] = list(range(page_obj.number - 3, page_obj.number + 4))
 
         return context
 
