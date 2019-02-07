@@ -215,7 +215,7 @@ function get_filter_by_parameters() {
     var parameter;
     var filter_name;
 
-    if(parameters.length === 2) { // Url has parameters
+    if (parameters.length === 2) { // Url has parameters
         parameters = parameters[1].split("&");
     } else {
         return;

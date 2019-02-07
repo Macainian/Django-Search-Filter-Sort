@@ -66,8 +66,9 @@ class BaseBrowseView(ListView):
             url_args["page"] = 1
 
             return HttpResponse(json.dumps({
-                "message": ugettext("<strong>Invalid Page:</strong> Page {invalid_page} does not exist.<br><em>You will be redirected back to page {page}.</em>")
-                    .format(invalid_page=invalid_page, page=url_args["page"]),
+                "message": ugettext(
+                    "<strong>Invalid Page:</strong> Page {invalid_page} does not exist.<br><em>You will be redirected back to page {page}.</em>"
+                ).format(invalid_page=invalid_page, page=url_args["page"]),
                 "status": "failed",
                 "alert_status": "alert-info",
                 "page": url_args["page"],
@@ -212,6 +213,7 @@ class BaseBrowseView(ListView):
                     filter_name = filter_name.replace("__gt_date", "__gt")
 
                 new_values = []
+
                 for value in values:
                     if value == "__NONE_OR_BLANK__":
                         new_values.append("")
@@ -257,6 +259,7 @@ class BaseBrowseView(ListView):
                     sort_list[count] = "-birthday"
                 else:
                     sort_list[count] = "birthday"
+
             count += 1
 
         return sort_list
@@ -270,11 +273,12 @@ class BaseBrowseView(ListView):
         html_code += html_options_code + '</select>'
 
         self.filters.append(
-        {
-            "filter_name": filter_name,
-            "html_name": html_name,
-            "html_code": html_code
-        })
+            {
+                "filter_name": filter_name,
+                "html_name": html_name,
+                "html_code": html_code
+            }
+        )
 
         self.filter_names.append(filter_name)
 
@@ -293,10 +297,11 @@ class BaseBrowseView(ListView):
             'name="' + upper_filter_name + '" step="' + step_size + '" style="max-width: max-content" />'
 
         self.filters.append(
-        {
-            "html_name": html_name,
-            "html_code": html_code
-        })
+            {
+                "html_name": html_name,
+                "html_code": html_code
+            }
+        )
 
         self.filter_names.append(lower_filter_name)
         self.filter_names.append(upper_filter_name)
@@ -322,8 +327,9 @@ class BaseBrowseView(ListView):
                 else:
                     other_class_object = class_strings_to_class(object_dependency[1], object_dependency[2])
                     other_object_search_list = self.search_fields(other_class_object, list_of_used_classes)
-                    object_search_list += [str(object_dependency[0] + "__{0}").format(search_item) for search_item in
-                                           other_object_search_list]
+                    object_search_list += [
+                        str(object_dependency[0] + "__{0}").format(search_item) for search_item in other_object_search_list
+                    ]
 
             search_list = class_object.basic_search_list() + class_object.special_search_list() + object_search_list
 
