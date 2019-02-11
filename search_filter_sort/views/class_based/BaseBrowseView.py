@@ -257,6 +257,7 @@ class BaseBrowseView(ListView):
             times = datetime_range_filter_date_and_time_values["times"]
 
             if not dates:
+                self.create_or_edit_postgres_range_filter_dictionary(postgres_range_filter_dictionaries, filter_name, filter_type, RangeFilterTypes.DATETIME, [])
                 continue
             if not times:
                 times = [date for date in dates]
@@ -277,7 +278,16 @@ class BaseBrowseView(ListView):
             lowers = postgres_range_filter_dictionary["lowers"]
             uppers = postgres_range_filter_dictionary["uppers"]
             range_type = postgres_range_filter_dictionary["range_type"]
-            bounds_string = postgres_range_filter_dictionary["lower_bound"] + postgres_range_filter_dictionary["upper_bound"]
+            lower_bound = postgres_range_filter_dictionary.get("lower_bound", "[")
+            upper_bound = postgres_range_filter_dictionary.get("upper_bound", "]")
+
+            if not lower_bound:
+                lower_bound = "["
+
+            if not upper_bound:
+                upper_bound = "]"
+
+            bounds_string = lower_bound + upper_bound
             filter_list[query_filter_name] = self.create_psycopg2_range_object_list(lowers, uppers, range_type, bounds_string)
 
         return filter_list
@@ -450,13 +460,21 @@ class BaseBrowseView(ListView):
             elif range_type == RangeFilterTypes.TIME:
                 value = parser.parse(value)
             elif range_type in [RangeFilterTypes.NUMBER, RangeFilterTypes.AGE]:
-                value = int(value)
+                value = float(value)
 
             new_values.append(value)
 
         return new_values
 
     def create_psycopg2_range_object_list(self, lower_bounds, upper_bounds, range_type, bounds_string):
+        bound_value_length = max(len(lower_bounds), len(upper_bounds))
+
+        if not lower_bounds:
+            lower_bounds = [None for i in range(0, bound_value_length)]
+
+        if not upper_bounds:
+            upper_bounds = [None for i in range(0, bound_value_length)]
+
         lower_and_upper_pairs = zip(lower_bounds, upper_bounds)
         if range_type in [RangeFilterTypes.DATETIME, RangeFilterTypes.DATE, RangeFilterTypes.TIME]:
             TZ_RANGE_OBJECT = DateTimeTZRange
