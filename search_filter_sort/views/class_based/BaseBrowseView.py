@@ -1,10 +1,17 @@
+import datetime
 import operator
 import logging
 import json
 import re
-from functools import reduce
+import pytz
 
+from functools import reduce
+from importlib import util
+
+from dateutil import parser
+from dateutil.tz import tz
 from django.http import Http404, HttpResponse
+from django.utils.timezone import now
 from django.utils.translation import ugettext
 from django.db.models import Q
 from django.http.response import HttpResponseRedirect
@@ -12,6 +19,12 @@ from django.views.generic import ListView
 from django.conf import settings
 from django.core.exceptions import FieldError
 
+PSYCOPG2_FOUND = util.find_spec("psycopg2") is not None
+
+if PSYCOPG2_FOUND:
+    from psycopg2._range import DateTimeTZRange, NumericRange
+
+from search_filter_sort.utils.constants import RangeFilterTypes, PostgresRangeQueryFilterTypes
 from search_filter_sort.utils.misc import class_strings_to_class, convert_age_to_date
 
 logger = logging.getLogger(__name__)
@@ -36,6 +49,8 @@ class BaseBrowseView(ListView):
     deferments = []
     show_all_in_filter = True
     show_clear_sorts = True
+    using_postgres = False
+    postgres_filter_name_query_filter_type_map = {}
 
     search_by = None
     using_filters = None
@@ -183,56 +198,87 @@ class BaseBrowseView(ListView):
         filter_list = {}
         self.define_filters()
 
+        postgres_range_filter_dictionaries = {}
+        datetime_range_filter_dictionaries = {}
+
         for i in range(len(filter_names)):
             filter_name = filter_names[i]
 
             # This is only false if there are more filter_names than filter_values. Should be equal.
             if i < len(filter_values):
                 values = filter_values[i].split(",")
+                split_regex = re.compile("__lte|__lt|__gte|__gt")
+                split_filter_name = split_regex.split(filter_name)
+                filter_type = next(iter(split_regex.findall(filter_name)), None)
+                stripped_filter_name = split_filter_name[0]
+                stripped_filter_info = None
 
-                if "__lte_age" in filter_name or "__lt_age" in filter_name:
-                    values = [convert_age_to_date(int(filter_values[i]))]
-                    filter_name = filter_name.replace("__lte_age", "__lte")
-                    filter_name = filter_name.replace("__lt_age", "__lt")
-                elif "__lte_number" in filter_name or "__lt_number" in filter_name:
-                    filter_name = filter_name.replace("__lte_number", "__lte")
-                    filter_name = filter_name.replace("__lt_number", "__lt")
-                elif "__lte_date" in filter_name or "__lt_date" in filter_name:
-                    filter_name = filter_name.replace("__lte_date", "__lte")
-                    filter_name = filter_name.replace("__lt_date", "__lt")
+                if len(split_filter_name) != 1:
+                    stripped_filter_info = split_filter_name[1].replace("_", "", 1)
 
-                if "__gte_age" in filter_name or "__gt_age" in filter_name:
-                    values = [convert_age_to_date(int(filter_values[i]) + 1)]
-                    filter_name = filter_name.replace("__gte_age", "__gte")
-                    filter_name = filter_name.replace("__gt_age", "__gt")
-                elif "__gte_number" in filter_name or "__gt_number" in filter_name:
-                    filter_name = filter_name.replace("__gte_number", "__gte")
-                    filter_name = filter_name.replace("__gt_number", "__gt")
-                elif "__gte_date" in filter_name or "__gt_date" in filter_name:
-                    filter_name = filter_name.replace("__gte_date", "__gte")
-                    filter_name = filter_name.replace("__gt_date", "__gt")
+                if stripped_filter_info:
+                    if RangeFilterTypes.DATETIME in stripped_filter_info:
+                        dates_or_times = stripped_filter_info.split("_")[1] + "s"
+                        new_filter_name = stripped_filter_name + filter_type
 
-                new_values = []
+                        if not datetime_range_filter_dictionaries.get(new_filter_name, None):
+                            datetime_range_filter_dictionaries[new_filter_name] = {
+                                "times": [],
+                                "dates": [],
+                                "filter_type": filter_type
+                            }
 
-                for value in values:
-                    if value == "__NONE_OR_BLANK__":
-                        new_values.append("")
-                        value = None
-                    elif value == "__NONE__":
-                        value = None
-                    elif value == "__BLANK__":
-                        value = ""
-                    elif value == "__TRUE__":
-                        value = True
-                    elif value == "__FALSE__":
-                        value = False
+                        datetime_range_filter_dictionaries[new_filter_name][dates_or_times] = self.convert_values(values, stripped_filter_info.split("_")[1])
+                        continue
 
-                    new_values.append(value)
+                    if self.using_postgres:
+                        self.create_or_edit_postgres_range_filter_dictionary(postgres_range_filter_dictionaries, stripped_filter_name, filter_type, stripped_filter_info, values)
+                    else:
+                        if stripped_filter_info == RangeFilterTypes.AGE:
+                            values = [convert_age_to_date(int(filter_values[i]))]
 
-                values = new_values
-                filter_list[filter_name] = values
+                        if filter_type:
+                            filter_name = stripped_filter_name + filter_type
+
+                        filter_list[filter_name] = self.convert_values(values, stripped_filter_info)
+                else:
+                    if filter_type:
+                        filter_name = stripped_filter_name + filter_type
+
+                    filter_list[filter_name] = self.convert_values(values, stripped_filter_info)
             else:
                 break
+
+        for datetime_range_filter_name_and_type, datetime_range_filter_date_and_time_values in datetime_range_filter_dictionaries.items():
+            filter_name = datetime_range_filter_name_and_type.split("__")[0]
+            filter_type = datetime_range_filter_date_and_time_values["filter_type"]
+            datetime_values = []
+            dates = datetime_range_filter_date_and_time_values["dates"]
+            times = datetime_range_filter_date_and_time_values["times"]
+
+            if not dates:
+                continue
+            if not times:
+                times = [date for date in dates]
+
+            date_time_pairs = zip(dates, times)
+
+            for date_time_pair in date_time_pairs:
+                datetime_values.append(str(tz.resolve_imaginary(datetime.datetime.combine(date_time_pair[0].date(), date_time_pair[1].time())).replace(tzinfo=date_time_pair[0].tzinfo)))
+
+            if self.using_postgres:
+                self.create_or_edit_postgres_range_filter_dictionary(postgres_range_filter_dictionaries, filter_name, filter_type, RangeFilterTypes.DATETIME, datetime_values)
+            else:
+                filter_list[filter_name] = self.convert_values(datetime_values, RangeFilterTypes.DATETIME)
+
+        for postgres_range_filter_name, postgres_range_filter_dictionary in postgres_range_filter_dictionaries.items():
+            postgres_query_filter_type = self.postgres_filter_name_query_filter_type_map.get(postgres_range_filter_name, PostgresRangeQueryFilterTypes.CONTAINED_BY)
+            query_filter_name = postgres_range_filter_name + postgres_query_filter_type
+            lowers = postgres_range_filter_dictionary["lowers"]
+            uppers = postgres_range_filter_dictionary["uppers"]
+            range_type = postgres_range_filter_dictionary["range_type"]
+            bounds_string = postgres_range_filter_dictionary["lower_bound"] + postgres_range_filter_dictionary["upper_bound"]
+            filter_list[query_filter_name] = self.create_psycopg2_range_object_list(lowers, uppers, range_type, bounds_string)
 
         return filter_list
 
@@ -282,19 +328,65 @@ class BaseBrowseView(ListView):
 
         self.filter_names.append(filter_name)
 
-    def add_range_filter(self, html_name, filter_name, input_type, step_size="1"):
-        lower_filter_name = filter_name + "__gte_" + input_type
-        upper_filter_name = filter_name + "__lte_" + input_type
+    def add_range_filter(self, html_name, filter_name, filter_type, step_size="1", bounds="[]", postgres_range_field_comparison_type=None):
+        lower_bound = bounds[0]
+        upper_bound = bounds[1]
 
-        if input_type == "age":
-            input_type = "number"
+        if lower_bound == "[":
+            lower_bound_format = "__gte_"
+        elif lower_bound == "(":
+            lower_bound_format = "__gt_"
+        else:
+            raise Exception("Invalid lower bound of " + lower_bound)
 
-        html_code = \
-            '<input type="' + input_type + '" class="range-filter form-control" id="' + lower_filter_name + '_filter" ' + \
-            'name="' + lower_filter_name + '" step="' + step_size + '" style="max-width:max-content" />' + \
-            '<strong> - </strong>' + \
-            '<input type="' + input_type + '" class="range-filter form-control" id="' + upper_filter_name + '_filter" ' + \
-            'name="' + upper_filter_name + '" step="' + step_size + '" style="max-width: max-content" />'
+        if upper_bound == "]":
+            upper_bound_format = "__lte_"
+        elif upper_bound == ")":
+            upper_bound_format = "__lt_"
+        else:
+            raise Exception("Invalid upper bound of " + upper_bound)
+
+        if self.using_postgres and postgres_range_field_comparison_type:
+            self.postgres_filter_name_query_filter_type_map[filter_name] = postgres_range_field_comparison_type
+        elif postgres_range_field_comparison_type:
+            raise Exception("Datetime Tz Ranges are not supported unless you are using a postgres database. ")
+
+        lower_filter_name = filter_name + lower_bound_format + filter_type
+        upper_filter_name = filter_name + upper_bound_format + filter_type
+
+        if filter_type == RangeFilterTypes.AGE:
+            filter_type = RangeFilterTypes.NUMBER
+
+        if filter_type == RangeFilterTypes.DATETIME:
+            lower_filter_date_name = lower_filter_name + "_" + RangeFilterTypes.DATE
+            lower_filter_time_name = lower_filter_name + "_" + RangeFilterTypes.TIME
+            upper_filter_date_name = upper_filter_name + "_" + RangeFilterTypes.DATE
+            upper_filter_time_name = upper_filter_name + "_" + RangeFilterTypes.TIME
+            html_code = \
+                '<input type="' + RangeFilterTypes.DATE + '" class="range-filter form-control" id="' + lower_filter_date_name + '_filter" ' + \
+                'name="' + lower_filter_date_name + '" step="' + step_size + '" style="max-width:max-content" />' + \
+                '<input type="' + RangeFilterTypes.TIME + '" class="range-filter form-control" id="' + lower_filter_time_name + '_filter" ' + \
+                'name="' + lower_filter_time_name + '" step="' + step_size + '" style="max-width:max-content" />' + \
+                '<strong> - </strong>' + \
+                '<input type="' + RangeFilterTypes.DATE + '" class="range-filter form-control" id="' + upper_filter_date_name + '_filter" ' + \
+                'name="' + upper_filter_date_name + '" step="' + step_size + '" style="max-width:max-content" />' + \
+                '<input type="' + RangeFilterTypes.TIME + '" class="range-filter form-control" id="' + upper_filter_time_name + '_filter" ' + \
+                'name="' + upper_filter_time_name + '" step="' + step_size + '" style="max-width:max-content" />'
+
+            self.filter_names.append(lower_filter_date_name)
+            self.filter_names.append(lower_filter_time_name)
+            self.filter_names.append(upper_filter_date_name)
+            self.filter_names.append(upper_filter_time_name)
+        else:
+            html_code = \
+                '<input type="' + filter_type + '" class="range-filter form-control" id="' + lower_filter_name + '_filter" ' + \
+                'name="' + lower_filter_name + '" step="' + step_size + '" style="max-width:max-content" />' + \
+                '<strong> - </strong>' + \
+                '<input type="' + filter_type + '" class="range-filter form-control" id="' + upper_filter_name + '_filter" ' + \
+                'name="' + upper_filter_name + '" step="' + step_size + '" style="max-width: max-content" />'
+
+            self.filter_names.append(lower_filter_name)
+            self.filter_names.append(upper_filter_name)
 
         self.filters.append(
             {
@@ -302,9 +394,6 @@ class BaseBrowseView(ListView):
                 "html_code": html_code
             }
         )
-
-        self.filter_names.append(lower_filter_name)
-        self.filter_names.append(upper_filter_name)
 
     def search_fields(self, class_object, list_of_used_classes):
         object_search_list = []
@@ -334,3 +423,74 @@ class BaseBrowseView(ListView):
             search_list = class_object.basic_search_list() + class_object.special_search_list() + object_search_list
 
         return search_list
+
+    def convert_values(self, values, range_type):
+        the_now = now()
+        if settings.TIME_ZONE:
+            timezone = pytz.timezone(settings.TIME_ZONE)
+            the_now = the_now.astimezone(timezone)
+
+        current_time_zone = the_now.strftime("%z")
+        new_values = []
+
+        for value in values:
+            if value == "__NONE_OR_BLANK__":
+                new_values.append("")
+                value = None
+            elif value == "__NONE__":
+                value = None
+            elif value == "__BLANK__":
+                value = ""
+            elif value == "__TRUE__":
+                value = True
+            elif value == "__FALSE__":
+                value = False
+            elif range_type == RangeFilterTypes.DATE:
+                value = parser.parse(value + " 00:00:00" + current_time_zone)
+            elif range_type == RangeFilterTypes.TIME:
+                value = parser.parse(value)
+            elif range_type in [RangeFilterTypes.NUMBER, RangeFilterTypes.AGE]:
+                value = int(value)
+
+            new_values.append(value)
+
+        return new_values
+
+    def create_psycopg2_range_object_list(self, lower_bounds, upper_bounds, range_type, bounds_string):
+        lower_and_upper_pairs = zip(lower_bounds, upper_bounds)
+        if range_type in [RangeFilterTypes.DATETIME, RangeFilterTypes.DATE, RangeFilterTypes.TIME]:
+            TZ_RANGE_OBJECT = DateTimeTZRange
+        elif range_type in [RangeFilterTypes.NUMBER, RangeFilterTypes.AGE]:
+            TZ_RANGE_OBJECT = NumericRange
+        else:
+            raise Exception("Range Type of " + range_type + "does not map to any current psycopg2 range object")
+
+        return [TZ_RANGE_OBJECT(lower_and_upper_pair[0], lower_and_upper_pair[1], bounds=bounds_string) for lower_and_upper_pair in lower_and_upper_pairs]
+
+    def create_or_edit_postgres_range_filter_dictionary(self, postgres_range_filter_dictionaries, filter_name, filter_type, range_type, values):
+        if not postgres_range_filter_dictionaries.get(filter_name, None):
+            postgres_range_filter_dictionaries[filter_name] = {
+                "lowers": [],
+                "uppers": [],
+                "range_type": range_type,
+                "lower_bound": None,
+                "upper_bound": None
+            }
+
+        if "g" in filter_type:
+            upper_or_lower_bound = "lower"
+            bound_character = "("
+
+            if "te" in filter_type:
+                bound_character = "["
+        elif "l" in filter_type:
+            upper_or_lower_bound = "upper"
+            bound_character = ")"
+
+            if "te" in filter_type:
+                bound_character = "]"
+        else:
+            raise Exception("Invalid bound of " + filter_type)
+
+        postgres_range_filter_dictionaries[filter_name][upper_or_lower_bound + "_bound"] = bound_character
+        postgres_range_filter_dictionaries[filter_name][upper_or_lower_bound + "s"] = self.convert_values(values, range_type)

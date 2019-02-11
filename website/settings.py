@@ -121,9 +121,10 @@ LOCALE_PATHS = (
 
 # Languages currently being used for translation purposes
 LANGUAGES = [
-    ("en", ugettext_lazy("English")),
+    ("en-us", ugettext_lazy("English US")),
     ("zh-hant", ugettext_lazy("Traditional Chinese")),
-    ("zh-hans", ugettext_lazy("Simplified Chinese"))
+    ("zh-hans", ugettext_lazy("Simplified Chinese")),
+    ("es-mx", ugettext_lazy("Mexican Spanish")),
 ]
 
 # Ignore files or directories when translating (makemessages, compilemessages)
