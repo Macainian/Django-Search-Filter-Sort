@@ -460,7 +460,10 @@ class BaseBrowseView(ListView):
             elif range_type == RangeFilterTypes.TIME:
                 value = parser.parse(value)
             elif range_type in [RangeFilterTypes.NUMBER, RangeFilterTypes.AGE]:
-                value = float(value)
+                try:
+                    value = int(value)
+                except ValueError:
+                    value = float(value)
 
             new_values.append(value)
 
