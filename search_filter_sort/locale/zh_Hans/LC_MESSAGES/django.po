@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-11 11:06-0500\n"
-"PO-Revision-Date: 2018-04-11 11:21+0800\n"
+"PO-Revision-Date: 2019-04-22 14:21+0800\n"
 "Last-Translator: Tseng Yu Chia <blackmei2631@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh\n"
@@ -18,10 +18,8 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #: .\website\settings.py:124
-#, fuzzy
-#| msgid "English"
 msgid "English US"
-msgstr "英语"
+msgstr "英语（美国）"
 
 #: .\website\settings.py:125
 msgid "Traditional Chinese"
@@ -33,7 +31,7 @@ msgstr "简体中文"
 
 #: .\website\settings.py:127
 msgid "Mexican Spanish"
-msgstr ""
+msgstr "墨西哥西班牙"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:12
 msgid "First"
@@ -100,9 +98,7 @@ msgid "Note"
 msgstr "备注"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:69
-msgid ""
-"Special hidden filters are currently being applied. To remove them, click "
-"clear filters."
+msgid "Special hidden filters are currently being applied. To remove them, click clear filters."
 msgstr "部分隐藏的筛选已经被执行。要删除它们，请点击清除筛选"
 
 #: .\search_filter_sort\templates\search_filter_sort\search_filter_sort.html:109
@@ -123,10 +119,8 @@ msgstr "已筛选"
 
 #: .\search_filter_sort\views\class_based\BaseBrowseView.py:85
 #, python-brace-format
-msgid ""
-"<strong>Invalid Page:</strong> Page {invalid_page} does not exist."
-"<br><em>You will be redirected back to page {page}.</em>"
-msgstr ""
+msgid "<strong>Invalid Page:</strong> Page {invalid_page} does not exist.<br><em>You will be redirected back to page {page}.</em>"
+msgstr "<strong>页面无效：</strong> 页面， {invalid_page} 不存在。<br><em>您将被重定向回页面{page}.</em>"
 
 #~ msgid "of"
 #~ msgstr "/"

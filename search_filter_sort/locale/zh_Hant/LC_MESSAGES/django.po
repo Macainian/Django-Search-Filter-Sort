@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-11 11:06-0500\n"
-"PO-Revision-Date: 2018-04-11 11:19+0800\n"
+"PO-Revision-Date: 2019-04-22 14:00+0800\n"
 "Last-Translator: Tseng Yu Chia <blackmei2631@gmail.com>\n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -18,10 +18,8 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #: .\website\settings.py:124
-#, fuzzy
-#| msgid "English"
 msgid "English US"
-msgstr "英語"
+msgstr "英語(美國)"
 
 #: .\website\settings.py:125
 msgid "Traditional Chinese"
@@ -33,7 +31,7 @@ msgstr "简体中文"
 
 #: .\website\settings.py:127
 msgid "Mexican Spanish"
-msgstr ""
+msgstr "墨西哥西班牙"
 
 #: .\search_filter_sort\templates\search_filter_sort\pagination_page_navigation.html:12
 msgid "First"
@@ -127,6 +125,8 @@ msgid ""
 "<strong>Invalid Page:</strong> Page {invalid_page} does not exist."
 "<br><em>You will be redirected back to page {page}.</em>"
 msgstr ""
+"<strong>Invalid Page:</strong>頁面，{invalid_page} 不存在。<br><em>您將被"
+"重定向回頁面 {page}.</em>"
 
 #~ msgid "of"
 #~ msgstr "/"
