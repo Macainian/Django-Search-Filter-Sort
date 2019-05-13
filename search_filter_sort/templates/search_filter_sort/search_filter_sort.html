@@ -4,14 +4,14 @@
     <div class="col-md-6">
         <div class="input-group input-group-sm">
             <label for="paginate_by_select" hidden>{% trans "Choose Items Per Page" %}</label>
-            <select class="custom-select form-control form-control-sm" id="paginate_by_select" aria-labelledby="Select Number Of Items Per Page">
+            <select class="form-control form-control-sm" id="paginate_by_select" aria-labelledby="Select Number Of Items Per Page">
                 <option value="10" {% if paginate_by == 10 %}selected{% endif %}>{% trans "10 Items Per Page" %}</option>
                 <option value="25" {% if paginate_by == 25 %}selected{% endif %}>{% trans "25 Items Per Page" %}</option>
                 <option value="50" {% if paginate_by == 50 %}selected{% endif %}>{% trans "50 Items Per Page" %}</option>
                 <option value="100" {% if paginate_by == 100 %}selected{% endif %}>{% trans "100 Items Per Page" %}</option>
             </select>
             <div class="input-group-append">
-                <button class="btn btn-sm" type="button" id="clear_all_button" onclick="clear_all()">
+                <button class="btn btn-default btn-sm button-default-bg-color" type="button" id="clear_all_button" onclick="clear_all()">
                     <i class="fas fa-ban"></i>{% trans "Clear All" %}
                 </button>
             </div>
@@ -53,11 +53,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group input-group-sm float-right" id="apply_and_clear_filters_buttons">
-                                    <button type="button" class="btn btn-default btn-sm" id="apply_filters_button"
+                                    <button type="button" class="btn btn-default btn-sm button-default-bg-color" id="apply_filters_button"
                                         onclick="apply_filters();" disabled>
                                         {% trans "Apply Filters" %}
                                     </button>
-                                    <button type="button" class="btn btn-default btn-sm" id="clear_filters_button" onclick="clear_filters()"
+                                    <button type="button" class="btn btn-default btn-sm button-default-bg-color" id="clear_filters_button" onclick="clear_filters()"
                                         disabled>
                                         <i class="fas fa-filter"></i>{% trans "Clear Filters" %}
                                     </button>

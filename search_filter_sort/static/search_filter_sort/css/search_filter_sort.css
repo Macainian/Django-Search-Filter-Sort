@@ -182,3 +182,7 @@ a.select-filters.collapsed .fa-caret-down {
 .svg-inline--fa.no-right-margin {
     margin-right: 0;
 }
+
+.button-default-bg-color {
+    background-color: #DDDDDD;
+}
