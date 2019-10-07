@@ -32,12 +32,14 @@ function initialize_search_filter_sort() {
         page_num_input_form_size(page_number_text);
     });
 
-    $(window).keydown(function(e) {
-        if(e.key === 13 && $("#search_text").is(":focus")) {
+    $(window).keydown(function(event) {
+        var key_code = event.which || event.key;
+
+        if(key_code === 13 && $("#search_text").is(":focus")) {
             search();
         }
 
-        if(e.key === 13 && page_number_text.is(":focus")) {
+        if(key_code === 13 && page_number_text.is(":focus")) {
             goto_page(page_number_text.val());
         }
     });
