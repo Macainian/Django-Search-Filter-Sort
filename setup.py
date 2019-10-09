@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-search-filter-sort',
-    version='0.2.7',
+    version='0.2.8',
     # find_packages() takes a source directory and two lists of package name patterns to exclude and include.
     # If omitted, the source directory defaults to the same directory as the setup script.
     packages=find_packages(),
