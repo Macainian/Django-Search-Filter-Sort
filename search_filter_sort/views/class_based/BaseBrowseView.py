@@ -250,7 +250,9 @@ class BaseBrowseView(ListView):
                 break
 
         for datetime_range_filter_name_and_type, datetime_range_filter_date_and_time_values in datetime_range_filter_dictionaries.items():
-            filter_name = datetime_range_filter_name_and_type.split("__")[0]
+            filter_name_substring_list = datetime_range_filter_name_and_type.split("__")
+            number_of_double_underscores_in_string_filter_name = len(filter_name_substring_list) - 1
+            filter_name = "__".join(filter_name_substring_list[0:number_of_double_underscores_in_string_filter_name])
             filter_type = datetime_range_filter_date_and_time_values["filter_type"]
             datetime_values = []
             dates = datetime_range_filter_date_and_time_values["dates"]
