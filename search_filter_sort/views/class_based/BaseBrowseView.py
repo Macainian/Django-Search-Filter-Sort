@@ -250,7 +250,7 @@ class BaseBrowseView(ListView):
                 break
 
         for datetime_range_filter_name_and_type, datetime_range_filter_date_and_time_values in datetime_range_filter_dictionaries.items():
-            filter_name = datetime_range_filter_name_and_type.split("__")[0]
+            filter_name = "__".join(datetime_range_filter_name_and_type.split("__")[0:-1])
             filter_type = datetime_range_filter_date_and_time_values["filter_type"]
             datetime_values = []
             dates = datetime_range_filter_date_and_time_values["dates"]
