@@ -19,7 +19,7 @@ Install the latest release using pip:
 
 `pip install django-search-filter-sort`
 
-Development version can installed using `pip install git+https://github.com/Macainian/Django-Search-Filter-Sort.git`, though be
+Development version can be installed using `pip install git+https://github.com/Macainian/Django-Search-Filter-Sort.git`, though be
 warned that I don't guarantee anything about the development version. Sometimes it is completely broken because I am
 in the middle of major code changes and swapping from one machine to another.
 
