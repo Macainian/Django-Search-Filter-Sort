@@ -4,14 +4,14 @@
         {% if tooltip_title %}
             <i data-toggle="tooltip" title="{{ tooltip_title }}" class="fas fa-info-circle no-right-margin"></i>
         {% endif %}
-        <div class="th-container">
+        <div class="th-container {% if sorting_shade %}{{ sorting_shade }}{% else %}dark{% endif %}">
             <div class="column-title">{{ col_title }}</div>
-            <div class="sort-container">
-                <div class="sort-controls sorting-none {% if sorting_shade %}{{ sorting_shade }}{% else %}dark{% endif %}">
-                    <span>
-                        <strong id="{{ col_type }}_number"></strong>&nbsp;&nbsp;
-                    </span>
+            <div class="sort-controls">
+                <i class="sorting-asc"></i>
+                <div class="sorting-num" style="display: none">
+                    <strong id="{{ col_type }}_number"></strong>
                 </div>
+                <i class="sorting-desc"></i>
             </div>
         </div>
     </th>

@@ -396,11 +396,22 @@ function goto_new_url(should_include_searches, should_include_filters, should_in
 function change_sorting_symbol(base_id, new_class) {
     var sort_to_set = $("#" + base_id + "_header").find(".sort-controls");
 
-    sort_to_set.removeClass("sorting-none");
-    sort_to_set.removeClass("sorting-asc");
-    sort_to_set.removeClass("sorting-desc");
+    sort_to_set.find("div[class^='sorting-']").hide();
 
-    sort_to_set.addClass(new_class);
+    if (new_class === "sorting-asc") {
+        sort_to_set.find(".sorting-num").css("margin-top", "-60%")
+        sort_to_set.find(".sorting-asc, .sorting-num").show();
+        sort_to_set.find(".sorting-desc").hide();
+    }
+    else if (new_class === "sorting-desc") {
+        sort_to_set.find(".sorting-desc").css("margin-top", "20%")
+        sort_to_set.find(".sorting-desc, .sorting-num").show();
+        sort_to_set.find(".sorting-asc").hide();
+    }
+    else {
+        sort_to_set.find(".sorting-asc, .sorting-desc").show();
+        sort_to_set.find(".sorting-num").hide();
+    }
 }
 
 function set_filter_button_states() {

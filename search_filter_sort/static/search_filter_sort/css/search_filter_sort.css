@@ -1,38 +1,13 @@
-/** Table Header Sorting Background Styles **/
-.sorting-none.dark {
-    background-image:url("../images/sort_both.png");
-    background-repeat: no-repeat;
-    background-position: top 6px right;
+.sorting-asc::before {
+    content: "\25B2";
+    display: block;
+    margin-top: -10%;
 }
 
-.sorting-asc.dark {
-    background-image:url("../images/sort_asc.png");
-    background-repeat: no-repeat;
-    background-position: top -2px right;
-}
-
-.sorting-desc.dark {
-    background-image:url("../images/sort_desc.png");
-    background-repeat: no-repeat;
-    background-position: bottom 1px right;
-}
-
-.sorting-none.light {
-    background-image:url("../images/sort_both_light.png");
-    background-repeat: no-repeat;
-    background-position: top 6px right;
-}
-
-.sorting-asc.light {
-    background-image:url("../images/sort_asc_light.png");
-    background-repeat: no-repeat;
-    background-position: top -2px right;
-}
-
-.sorting-desc.light {
-    background-image:url("../images/sort_desc_light.png");
-    background-repeat: no-repeat;
-    background-position: bottom 1px right;
+.sorting-desc::before {
+    content: "\25BC";
+    display: block;
+    margin-top: -60%;
 }
 
 .sortable-th {
@@ -42,35 +17,36 @@
 }
 
 .sortable-th .th-container {
-    display: block;
-    width: 100%;
-    vertical-align: middle;
+    display: grid;
+}
+
+.sortable-th .th-container.light {
+    color: #fff;
+}
+
+.sortable-th .th-container.dark {
+    color: #333;
+}
+
+.sortable-th .th-container .sort-controls {
+    display: grid;
+    justify-content: end;
+    text-align: center;
+    grid-column-start: 6;
+    align-self: center;
+    height: 32px;
+    margin-top: 10%;
+    justify-self: end;
+    margin-right: -.25rem;
 }
 
 .sortable-th .th-container .column-title {
-    display: table-cell;
-    width: 100%;
-    vertical-align: middle;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    align-self: center;
 }
 
-.sortable-th .th-container .sort-container {
-    display: table-cell;
-    max-width: 19px;
-    vertical-align: middle;
-    padding-left: 6px;
-    height: 32px;
-    text-align: center;
-}
-
-.sortable-th .th-container .sort-container .sort-controls {
-    display: inline-table;
-    height: 32px;
-    width: 19px;
-}
-
-.sortable-th .th-container .sort-container .sort-controls span {
-    display:table-cell;
-    vertical-align: middle;
+.sortable-th .th-container .sort-controls .sorting-num {
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 0.8em;
 }
