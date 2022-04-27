@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import gettext_lazy
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -121,10 +121,10 @@ LOCALE_PATHS = (
 
 # Languages currently being used for translation purposes
 LANGUAGES = [
-    ("en-us", ugettext_lazy("English US")),
-    ("zh-hant", ugettext_lazy("Traditional Chinese")),
-    ("zh-hans", ugettext_lazy("Simplified Chinese")),
-    ("es-mx", ugettext_lazy("Mexican Spanish")),
+    ("en-us", gettext_lazy("English US")),
+    ("zh-hant", gettext_lazy("Traditional Chinese")),
+    ("zh-hans", gettext_lazy("Simplified Chinese")),
+    ("es-mx", gettext_lazy("Mexican Spanish")),
 ]
 
 # Ignore files or directories when translating (makemessages, compilemessages)

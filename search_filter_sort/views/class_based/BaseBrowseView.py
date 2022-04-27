@@ -12,7 +12,7 @@ from dateutil import parser
 from dateutil.tz import tz
 from django.http import Http404, HttpResponse
 from django.utils.timezone import now
-from django.utils.translation import ugettext
+from django.utils.translation import gettext
 from django.db.models import Q
 from django.http.response import HttpResponseRedirect
 from django.views.generic import ListView
@@ -81,7 +81,7 @@ class BaseBrowseView(ListView):
             url_args["page"] = 1
 
             return HttpResponse(json.dumps({
-                "message": ugettext(
+                "message": gettext(
                     "<strong>Invalid Page:</strong> Page {invalid_page} does not exist.<br><em>You will be redirected back to page {page}.</em>"
                 ).format(invalid_page=invalid_page, page=url_args["page"]),
                 "status": "failed",
