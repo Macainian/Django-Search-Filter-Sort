@@ -19,10 +19,10 @@ from django.views.generic import ListView
 from django.conf import settings
 from django.core.exceptions import FieldError
 
-PSYCOPG2_FOUND = util.find_spec("psycopg2") is not None
+PSYCOPG_FOUND = util.find_spec("psycopg") is not None
 
-if PSYCOPG2_FOUND:
-    from psycopg2._range import DateTimeTZRange, NumericRange
+if PSYCOPG_FOUND:
+    from psycopg.types.range import TimestamptzRange, NumericRange
 
 from search_filter_sort.utils.constants import RangeFilterTypes, PostgresRangeQueryFilterTypes
 from search_filter_sort.utils.misc import class_strings_to_class, convert_age_to_date
@@ -480,7 +480,7 @@ class BaseBrowseView(ListView):
 
         lower_and_upper_pairs = zip(lower_bounds, upper_bounds)
         if range_type in [RangeFilterTypes.DATETIME, RangeFilterTypes.DATE, RangeFilterTypes.TIME]:
-            TZ_RANGE_OBJECT = DateTimeTZRange
+            TZ_RANGE_OBJECT = TimestamptzRange
         elif range_type in [RangeFilterTypes.NUMBER, RangeFilterTypes.AGE]:
             TZ_RANGE_OBJECT = NumericRange
         else:
