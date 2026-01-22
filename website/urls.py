@@ -13,7 +13,7 @@ last_modified_date = datetime.now(tz=get_current_timezone())
 
 urlpatterns = i18n_patterns(
     re_path(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
-    re_path(r'^admin/', include(admin.site.urls)),
+    re_path(r'^admin/', admin.site.urls),
     re_path(r'^i18n/', include('django.conf.urls.i18n')),
     re_path(r'^jsi18n/$', last_modified(lambda req, **kw: last_modified_date)(JavaScriptCatalog.as_view()), name='website.javascript_catalog'),
 )

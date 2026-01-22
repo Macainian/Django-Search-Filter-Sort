@@ -24,6 +24,7 @@
     patterns
 """
 import os
+import math
 from django.conf import settings as django_settings
 from django.core.management.base import BaseCommand
 from django.core import management
@@ -62,6 +63,9 @@ class Command(BaseCommand):
             help='Compiles .po files to .mo files (compilemessages only)'
         )
 
+    def abc(self, language_code):
+        return language_code[0:2] + "_" + language_code[3:5].upper()
+
     def handle(self, *args, **options):
         if self.settings is None:
             raise Exception("settings is None")
@@ -71,7 +75,7 @@ class Command(BaseCommand):
         else:
             ignore_patterns = Command.ignore_patterns
 
-        self.language_names = [language_tuple[0] for language_tuple in self.settings.LANGUAGES]
+        self.language_names = [self.abc(language_tuple[0]) for language_tuple in self.settings.LANGUAGES]
         self.full_locale_path = os.path.join(self.settings.BASE_DIR, "search_filter_sort", "locale")
 
         po_list = []
@@ -90,24 +94,27 @@ class Command(BaseCommand):
             should_make_djangojs = False
             should_compile = True
 
-        if should_compile:
-            self.stdout.write("Compiling All Translation Files")
-            management.call_command('compilemessages', local=self.language_names)
-            return
+        try:
+            if should_compile:
+                self.stdout.write("Compiling All Translation Files")
+                management.call_command('compilemessages', local=self.language_names)
+                return
 
-        self.rename_locale_folders("-")
+        # self.rename_locale_folders("-")
 
-        if should_make_django:
-            self.stdout.write("Translating Python and template files")
-            management.call_command('makemessages', locale=self.language_names, domain='django', ignore=ignore_patterns)
-            po_list.append("django.po")
+            if should_make_django:
+                self.stdout.write("Translating Python and template files")
+                management.call_command('makemessages', locale=self.language_names, domain='django', ignore=ignore_patterns)
+                po_list.append("django.po")
 
-        if should_make_djangojs:
-            self.stdout.write("Translating JavaScript files")
-            management.call_command('makemessages', locale=self.language_names, domain='djangojs', ignore=ignore_patterns)
-            po_list.append("djangojs.po")
+            if should_make_djangojs:
+                self.stdout.write("Translating JavaScript files")
+                management.call_command('makemessages', locale=self.language_names, domain='djangojs', ignore=ignore_patterns)
+                po_list.append("djangojs.po")
 
-        self.rename_locale_folders("_")
+        except Exception as error:
+            raise error
+        # self.rename_locale_folders("_")
 
     def rename_locale_folders(self, new_folder_splitter):
         for language_name in self.language_names:

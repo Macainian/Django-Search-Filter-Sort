@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'search_filter_sort'
 ]
 
-MIDDLEWARE_CLASSES = [
-    'django.middleware.security.SecurityMiddleware',
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,14 +121,17 @@ LOCALE_PATHS = (
 # Languages currently being used for translation purposes
 LANGUAGES = [
     ("en-us", gettext_lazy("English US")),
-    ("zh-hant", gettext_lazy("Traditional Chinese")),
-    ("zh-hans", gettext_lazy("Simplified Chinese")),
+    #("zh-hant", gettext_lazy("Traditional Chinese")),
+    #("zh-hans", gettext_lazy("Simplified Chinese")),
     ("es-mx", gettext_lazy("Mexican Spanish")),
+    ("ab-cd", gettext_lazy("Test Language")),
 ]
 
 # Ignore files or directories when translating (makemessages, compilemessages)
 LANGUAGE_IGNORE_PATTERNS = [
-    "django_search_filter_sort.egg-info/*"
+    "django_search_filter_sort.egg-info/*",
+    "venv/*",
+    "**/static/admin/**"
 ]
 
 
