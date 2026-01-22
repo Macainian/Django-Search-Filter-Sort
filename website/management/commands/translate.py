@@ -97,7 +97,7 @@ class Command(BaseCommand):
         try:
             if should_compile:
                 self.stdout.write("Compiling All Translation Files")
-                management.call_command('compilemessages', local=self.language_names)
+                management.call_command('compilemessages', locale=self.language_names)
                 return
 
         # self.rename_locale_folders("-")
