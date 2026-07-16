@@ -1,4 +1,5 @@
 Django==4.2.0
+twine==6.2.0
 
 # requests==2.18.4
 # pytz==2017.2
