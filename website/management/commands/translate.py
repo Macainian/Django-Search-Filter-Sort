@@ -6,11 +6,17 @@
 from django.core.management.base import BaseCommand
 from django.core import management
 from django.utils.translation import to_locale
+from django.conf import settings as django_settings
 
 
 class Command(BaseCommand):
     help = "Runs command makemessages for all domains"
     language_names = None
+
+    SETTINGS = django_settings
+
+    default_app_name = "website"
+    default_app_folder = "apps"
 
     def add_arguments(self, parser):
         parser.add_argument(

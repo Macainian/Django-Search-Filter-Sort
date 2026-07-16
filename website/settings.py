@@ -121,8 +121,8 @@ LOCALE_PATHS = (
 # Languages currently being used for translation purposes
 LANGUAGES = [
     ("en-us", gettext_lazy("English US")),
-    #("zh-hant", gettext_lazy("Traditional Chinese")),
-    #("zh-hans", gettext_lazy("Simplified Chinese")),
+    ("zh-hant", gettext_lazy("Traditional Chinese")),
+    ("zh-hans", gettext_lazy("Simplified Chinese")),
     ("es-mx", gettext_lazy("Mexican Spanish")),
     ("ab-cd", gettext_lazy("Test Language")),
 ]
