@@ -23,11 +23,11 @@ msgstr "⟦English US⟧"
 
 #: .\website\settings.py:124
 msgid "Traditional Chinese"
-msgstr ""
+msgstr "⟦Traditional Chinese⟧"
 
 #: .\website\settings.py:125
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "⟦Simplified Chinese⟧"
 
 #: .\website\settings.py:126
 msgid "Mexican Spanish"
